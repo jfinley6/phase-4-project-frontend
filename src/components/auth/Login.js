@@ -1,40 +1,42 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Registration({ handleSuccessfulAuth }) {
+function Login({ handleSuccessfulAuth }) {
   const [registration, setRegistration] = useState({
     email: "",
     password: "",
-    password_confirmation: "",
-    registrationErrors: "",
+    loginErrors: "",
   });
 
   const { email, password, password_confirmation } = registration;
 
   function handleChange(event) {
-    setRegistration({ ...registration, [event.target.name]: event.target.value });
+    setRegistration({
+      ...registration,
+      [event.target.name]: event.target.value,
+    });
   }
 
   function handleSubmit(event) {
     axios
       .post(
-        "http://localhost:3001/registrations",
+        "http://localhost:3001/sessions",
         {
           user: {
             email: email,
             password: password,
-            password_confirmation: password_confirmation,
           },
         },
         { withCredentials: true }
       )
       .then((response) => {
-        if (response.data.status === "created") {
+        console.log("res from login", response);
+        if (response.data.logged_in) {
           handleSuccessfulAuth(response.data.user);
         }
       })
       .catch((error) => {
-        console.log("registration error", error);
+        console.log("login error", error);
       });
     event.preventDefault();
   }
@@ -42,12 +44,12 @@ function Registration({ handleSuccessfulAuth }) {
   return (
     <form onSubmit={handleSubmit} className="d-flex flex-column">
       <div className="form-group d-flex flex-column align-items-center">
-        <label htmlFor="InputEmail1">Email address</label>
+        <label htmlFor="exampleInputEmail1">Email address</label>
         <input
           type="email"
           name="email"
           className="form-control"
-          id="InputEmail1"
+          id="exampleInputEmail1"
           placeholder="Enter email"
           value={email}
           onChange={handleChange}
@@ -55,36 +57,23 @@ function Registration({ handleSuccessfulAuth }) {
         />
       </div>
       <div className="form-group d-flex flex-column align-items-center">
-        <label htmlFor="InputPassword1">Password</label>
+        <label htmlFor="exampleInputPassword1">Password</label>
         <input
           type="password"
           name="password"
           className="form-control"
-          id="InputPassword1"
+          id="exampleInputPassword1"
           placeholder="Password"
           value={password}
           onChange={handleChange}
           required
         />
       </div>
-      <div className="form-group d-flex flex-column align-items-center">
-        <label htmlFor="InputPassword1">Password Confirmation</label>
-        <input
-          type="password"
-          name="password_confirmation"
-          className="form-control"
-          id="InputPassword2"
-          placeholder="Password Confirmation"
-          value={password_confirmation}
-          onChange={handleChange}
-          required
-        />
-      </div>
       <button className="btn btn-primary mt-2" type="submit">
-        Register
+        Login
       </button>
     </form>
   );
 }
 
-export default Registration;
+export default Login;
