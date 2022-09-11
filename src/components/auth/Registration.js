@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Registration({ handleSuccessfulAuth }) {
+function Registration({ handleSuccessfulAuth, setScreen }) {
   const [registration, setRegistration] = useState({
     email: "",
     password: "",
@@ -81,8 +81,20 @@ function Registration({ handleSuccessfulAuth }) {
         />
       </div>
       <button className="btn btn-primary mt-2" type="submit">
-        Register
+        Sign Up
       </button>
+      <div className="d-flex flex-column align-items-center mt-2">
+        <div>Already Have An Account?</div>
+        <a
+          onClick={(e) => {
+            e.preventDefault();
+            setScreen(true);
+          }}
+          className="link-secondary"
+        >
+          Login Here
+        </a>
+      </div>
     </form>
   );
 }

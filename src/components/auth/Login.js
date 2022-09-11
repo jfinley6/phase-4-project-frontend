@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function Login({ handleSuccessfulAuth }) {
+function Login({ handleSuccessfulAuth, setScreen }) {
   const [registration, setRegistration] = useState({
     email: "",
     password: "",
     loginErrors: "",
   });
 
-  const { email, password, password_confirmation } = registration;
+  const { email, password } = registration;
 
   function handleChange(event) {
     setRegistration({
@@ -30,7 +30,6 @@ function Login({ handleSuccessfulAuth }) {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log("res from login", response);
         if (response.data.logged_in) {
           handleSuccessfulAuth(response.data.user);
         }
@@ -72,6 +71,18 @@ function Login({ handleSuccessfulAuth }) {
       <button className="btn btn-primary mt-2" type="submit">
         Login
       </button>
+      <div className="d-flex flex-column align-items-center mt-2">
+        <div>Don't have an account?</div>
+        <a
+          onClick={(e) => {
+            e.preventDefault();
+            setScreen(false);
+          }}
+          className="link-secondary"
+        >
+          Sign Up Here
+        </a>
+      </div>
     </form>
   );
 }
