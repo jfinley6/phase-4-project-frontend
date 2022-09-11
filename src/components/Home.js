@@ -3,18 +3,17 @@ import Registration from "./auth/Registration";
 import Login from "./auth/Login";
 import { useHistory } from "react-router-dom";
 
-function Home({ loggedInStatus, handleLogin }) {
-  const [screen, setScreen] = useState(true);
+function Home({ loggedInStatus, handleLogin, screen, setScreen }) {
   const history = useHistory();
 
   function handleSuccessfulAuth(data) {
     handleLogin(data);
-    history.push("/dashboard");
+    history.push("/");
   }
 
   return (
     <div className="d-flex flex-column align-items-center">
-      <h1>Home</h1>
+      <h1>{screen ? "Login" : "Signup"}</h1>
       {screen !== true ? (
         <Registration handleSuccessfulAuth={handleSuccessfulAuth} setScreen={setScreen} />
       ) : null}
