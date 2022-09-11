@@ -1,8 +1,17 @@
 import React from 'react'
+import { useHistory } from 'react-router'
 
-function Content() {
+function Content({loggedInStatus}) {
+  const history = useHistory()
+
+  function logged_in() {
+    if (loggedInStatus === "NOT_LOGGED_IN") {
+      history.push("/home")
+    }
+  }
+
   return (
-    <div className='d-flex justify-content-center'>Content</div>
+    <button onClick={logged_in} className='btn btn-primary d-flex justify-content-center'>Content</button>
   )
 }
 

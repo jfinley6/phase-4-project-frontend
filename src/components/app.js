@@ -9,7 +9,7 @@ import axios from "axios";
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
   const [user, setUser] = useState({});
-  const [screen, setScreen] = useState(true);
+  const [screen, setScreen] = useState(false);
 
   useEffect(() => {
     checkLoginStatus();
@@ -57,7 +57,7 @@ function App() {
       <NavBar loggedInStatus={loggedInStatus} setScreen={setScreen} handleLogout={handleLogout} />
       <Switch>
         <Route exact path={"/"}>
-          <Content />
+          <Content loggedInStatus={loggedInStatus}/>
         </Route>
         <Route exact path={"/home"}>
           <Home
