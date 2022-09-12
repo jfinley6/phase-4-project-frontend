@@ -44,7 +44,7 @@ function NavBar({ loggedInStatus, setScreen, handleLogout, handleNewPost }) {
             onClick={() => {
               history.push("/new")
             }}
-            className="btn btn-primary my-2 mx-3 my-sm-0"
+            className="btn btn-primary my-2 mx-2 my-sm-0"
             type="submit"
           >
             New Post
