@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import Home from "./Home";
-import Dashboard from "./Dashboard";
 import Content from "./Content";
 import NavBar from "./NavBar";
 import axios from "axios";
