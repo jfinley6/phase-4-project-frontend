@@ -53,10 +53,14 @@ function App() {
 
   return (
     <div className="app d-flex flex-column justify-content-center">
-      <NavBar loggedInStatus={loggedInStatus} setScreen={setScreen} handleLogout={handleLogout} />
+      <NavBar
+        loggedInStatus={loggedInStatus}
+        setScreen={setScreen}
+        handleLogout={handleLogout}
+      />
       <Switch>
         <Route exact path={"/"}>
-          <Content loggedInStatus={loggedInStatus}/>
+          <Content loggedInStatus={loggedInStatus} />
         </Route>
         <Route exact path={"/home"}>
           <Home
