@@ -23,7 +23,7 @@ function Content({loggedInStatus}) {
   }
 
   return (
-        <div className="card-deck">
+        <div className='d-flex flex-column mt-3'>
           {allPosts}
         </div>
     // <button onClick={logged_in} className='btn btn-primary d-flex justify-content-center'>Content</button>
