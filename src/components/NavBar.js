@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 
-function NavBar({ loggedInStatus, setScreen, handleLogout }) {
+function NavBar({ loggedInStatus, setScreen, handleLogout, handleNewPost }) {
   const history = useHistory();
 
   return (
@@ -39,13 +39,24 @@ function NavBar({ loggedInStatus, setScreen, handleLogout }) {
           </button>
         </div>
       ) : (
-        <button
-          onClick={handleLogout}
-          className="btn btn-primary my-2 mx-3 my-sm-0"
-          type="submit"
-        >
-          Logout
-        </button>
+        <div>
+          <button
+            onClick={() => {
+              history.push("/new")
+            }}
+            className="btn btn-primary my-2 mx-2 my-sm-0"
+            type="submit"
+          >
+            New Post
+          </button>
+          <button
+            onClick={handleLogout}
+            className="btn btn-outline-primary my-2 mx-3 my-sm-0"
+            type="submit"
+          >
+            Logout
+          </button>
+        </div>
       )}
     </nav>
   );
