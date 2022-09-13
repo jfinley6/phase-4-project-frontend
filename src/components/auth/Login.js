@@ -3,6 +3,7 @@ import axios from "axios";
 
 function Login({ handleSuccessfulAuth, setScreen }) {
   const [registration, setRegistration] = useState({
+    username: "",
     email: "",
     password: "",
     loginErrors: "",
