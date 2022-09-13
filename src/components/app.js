@@ -11,6 +11,7 @@ function App() {
   const [user, setUser] = useState({});
   const [screen, setScreen] = useState(false);
   const [storedPost, setStoredPost] = useState("");
+  const [storedSubject, setStoredSubject] = useState("")
 
   useEffect(() => {
     checkLoginStatus();
@@ -70,7 +71,7 @@ function App() {
           />
         </Route>
         <Route exact path={"/new"}>
-          <NewPost user={user} storedPost={storedPost} setStoredPost={setStoredPost}/>
+          <NewPost user={user} storedPost={storedPost} setStoredPost={setStoredPost} setStoredSubject={setStoredSubject} storedSubject={storedSubject}/>
         </Route>
       </Switch>
     </div>
