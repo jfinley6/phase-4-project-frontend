@@ -4,6 +4,7 @@ import Home from "./Home";
 import Content from "./Content";
 import NavBar from "./NavBar";
 import axios from "axios";
+import User from "./User";
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
@@ -57,6 +58,7 @@ function App() {
         loggedInStatus={loggedInStatus}
         setScreen={setScreen}
         handleLogout={handleLogout}
+        user={user}
       />
       <Switch>
         <Route exact path={"/"}>
@@ -71,12 +73,10 @@ function App() {
             handleLogin={handleLogin}
           />
         </Route>
-        {/* <Route exact path={"/dashboard"}>
-          <Dashboard
-            loggedInStatus={loggedInStatus}
-            handleLogout={handleLogout}
-          />
-        </Route> */}
+
+        <Route exact path={"/user"}>
+          <User user={user} />
+        </Route>
       </Switch>
     </div>
   );
