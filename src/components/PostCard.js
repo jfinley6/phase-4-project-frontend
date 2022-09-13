@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 function PostCard({ post }) {
   return (
@@ -20,7 +21,7 @@ function PostCard({ post }) {
             0 likes | 0 comments
           </small>
         </p> */}
-        <button className="btn btn-primary">Read</button>
+        <Link className="btn btn-primary" to={`/posts/${post.id}`}>Read</Link>
       </div>
     </div>
   );

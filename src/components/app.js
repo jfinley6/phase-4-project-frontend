@@ -4,6 +4,7 @@ import Home from "./Home";
 import Content from "./Content";
 import NavBar from "./NavBar";
 import axios from "axios";
+import PostDetail from "./PostDetail";
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
@@ -73,6 +74,9 @@ function App() {
             handleLogout={handleLogout}
           />
         </Route> */}
+        <Route exact path="/posts/:id">
+          <PostDetail />
+        </Route>
       </Switch>
     </div>
   );
