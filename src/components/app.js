@@ -79,7 +79,7 @@ function App() {
 
         <Route exact path={"/new"}>
           <NewPost user={user} storedPost={storedPost} setStoredPost={setStoredPost} setStoredSubject={setStoredSubject} storedSubject={storedSubject}/>
-        <Route />
+        </Route>
 
         <Route exact path={"/user"}>
           <User user={user} />
