@@ -5,7 +5,11 @@ import Content from "./Content";
 import NavBar from "./NavBar";
 import NewPost from "./NewPost";
 import axios from "axios";
+<<<<<<< HEAD
 import User from "./User";
+=======
+import PostDetail from "./PostDetail";
+>>>>>>> aakash
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
@@ -76,6 +80,7 @@ function App() {
             handleLogin={handleLogin}
           />
         </Route>
+<<<<<<< HEAD
 
         <Route exact path={"/new"}>
           <NewPost user={user} storedPost={storedPost} setStoredPost={setStoredPost} setStoredSubject={setStoredSubject} storedSubject={storedSubject}/>
@@ -84,6 +89,16 @@ function App() {
         <Route exact path={"/user"}>
           <User user={user} />
 
+=======
+        {/* <Route exact path={"/dashboard"}>
+          <Dashboard
+            loggedInStatus={loggedInStatus}
+            handleLogout={handleLogout}
+          />
+        </Route> */}
+        <Route exact path="/posts/:id">
+          <PostDetail />
+>>>>>>> aakash
         </Route>
       </Switch>
     </div>
