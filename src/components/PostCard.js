@@ -1,7 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom"
+import User from "./User";
 
 function PostCard({ post }) {
+
   return (
     <div className="col-sm-3 d-flex justify-content-center align-items-center flex-column border mb-3 shadow rounded">
       <img
@@ -13,7 +15,7 @@ function PostCard({ post }) {
         <h5 className="card-title">{post.subject}</h5>
         <p className="card-text">
           <small className="text-muted">
-            Created at: {post.created_at.slice(0, -14)}
+            Created: {post.created_at.slice(0, -14)}
           </small>
         </p>
         {/* <p className="card-text">

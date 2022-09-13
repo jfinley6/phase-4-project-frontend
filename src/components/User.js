@@ -66,6 +66,25 @@ function User({ user }) {
               <form className="form-group-1">
                 <label className="col-sm-2 control-label">Username</label>
                 <h4 className="col-md-10 control-label">{user.username}</h4>
+              <div className="form-group">
+                <label className="col-sm-2 control-label">E-mail</label>
+                <div className="col-sm-10">
+                  <input type="email" className="form-control" value={user.email} />
+                </div>
+              </div>
+              <div className="form-group"></div>
+            </div>
+          </div>
+
+          <div className="panel panel-default">
+            <div className="panel-heading">
+              <h4 className="panel-title">Security</h4>
+            </div>
+            <div className="panel-body">
+              <div className="form-group">
+                <label className="col-sm-2 control-label">
+                  Current password
+                </label>
                 <div className="col-sm-10">
                   {/* <label className="col-sm-2 control-label">
                     {user.username}

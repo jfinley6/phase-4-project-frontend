@@ -22,16 +22,6 @@ function NavBar({
       >
         Dev Blog
       </h2>
-      <div>
-        <button
-          onClick={() => {
-            history.push("/user");
-          }}
-          className="btn btn-primary my-2 my-sm-0  "
-        >
-          User
-        </button>
-      </div>
 
       {loggedInStatus === "NOT_LOGGED_IN" ? (
         <div>
@@ -60,16 +50,24 @@ function NavBar({
         <div>
           <button
             onClick={() => {
+              history.push("/user");
+            }}
+            className="btn btn-primary my-2 mx-2 my-sm-0  "
+          >
+            Profile
+          </button>
+          <button
+            onClick={() => {
               history.push("/new");
             }}
-            className="btn btn-primary my-2 mx-2 my-sm-0"
+            className="btn btn-primary my-2 my-sm-0"
             type="submit"
           >
             New Post
           </button>
           <button
             onClick={handleLogout}
-            className="btn btn-outline-primary my-2 mx-3 my-sm-0"
+            className="btn btn-outline-primary my-2 mx-2 my-sm-0"
             type="submit"
           >
             Logout
