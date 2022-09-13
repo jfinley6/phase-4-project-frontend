@@ -12,7 +12,7 @@ function Home({ loggedInStatus, handleLogin, screen, setScreen }) {
   }
 
   return (
-    <div className="fade-in d-flex flex-column align-items-center">
+    <div className="fade-in d-flex flex-column align-items-center mt-2">
       <h1>{screen ? "Login" : "Signup"}</h1>
       {screen !== true ? (
         <Registration handleSuccessfulAuth={handleSuccessfulAuth} setScreen={setScreen} />
