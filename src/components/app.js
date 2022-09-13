@@ -5,14 +5,17 @@ import Content from "./Content";
 import NavBar from "./NavBar";
 import NewPost from "./NewPost";
 import axios from "axios";
+
 import User from "./User";
+
+import PostDetail from "./PostDetail";
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
   const [user, setUser] = useState({});
   const [screen, setScreen] = useState(false);
   const [storedPost, setStoredPost] = useState("");
-  const [storedSubject, setStoredSubject] = useState("")
+  const [storedSubject, setStoredSubject] = useState("");
 
   useEffect(() => {
     checkLoginStatus();
@@ -78,12 +81,20 @@ function App() {
         </Route>
 
         <Route exact path={"/new"}>
-          <NewPost user={user} storedPost={storedPost} setStoredPost={setStoredPost} setStoredSubject={setStoredSubject} storedSubject={storedSubject}/>
+          <NewPost
+            user={user}
+            storedPost={storedPost}
+            setStoredPost={setStoredPost}
+            setStoredSubject={setStoredSubject}
+            storedSubject={storedSubject}
+          />
         </Route>
 
         <Route exact path={"/user"}>
           <User user={user} />
-
+        </Route>
+        <Route exact path="/posts/:id">
+          <PostDetail />
         </Route>
       </Switch>
     </div>

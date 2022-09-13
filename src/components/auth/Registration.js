@@ -3,16 +3,20 @@ import axios from "axios";
 
 function Registration({ handleSuccessfulAuth, setScreen }) {
   const [registration, setRegistration] = useState({
+    username: "",
     email: "",
     password: "",
     password_confirmation: "",
     registrationErrors: "",
   });
 
-  const { email, password, password_confirmation } = registration;
+  const { username, email, password, password_confirmation } = registration;
 
   function handleChange(event) {
-    setRegistration({ ...registration, [event.target.name]: event.target.value });
+    setRegistration({
+      ...registration,
+      [event.target.name]: event.target.value,
+    });
   }
 
   function handleSubmit(event) {
@@ -21,6 +25,7 @@ function Registration({ handleSuccessfulAuth, setScreen }) {
         "http://localhost:3001/registrations",
         {
           user: {
+            username: username,
             email: email,
             password: password,
             password_confirmation: password_confirmation,
@@ -41,6 +46,19 @@ function Registration({ handleSuccessfulAuth, setScreen }) {
 
   return (
     <form onSubmit={handleSubmit} className="d-flex flex-column">
+      <div className="form-group d-flex flex-column align-items-center">
+        <label htmlFor="InputUsername1">Username</label>
+        <input
+          type="username"
+          name="username"
+          className="form-control"
+          id="InputUsername1"
+          placeholder="Enter username"
+          value={username}
+          onChange={handleChange}
+          required
+        />
+      </div>
       <div className="form-group d-flex flex-column align-items-center">
         <label htmlFor="InputEmail1">Email address</label>
         <input
