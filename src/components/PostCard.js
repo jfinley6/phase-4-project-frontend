@@ -2,7 +2,7 @@ import React from "react";
 
 function PostCard({ post }) {
   return (
-    <div className="col-sm-3 d-flex justify-content-center align-items-center flex-column border mb-3">
+    <div className="col-sm-3 d-flex justify-content-center align-items-center flex-column border mb-3 shadow rounded">
       <img
         src={post.image_url}
         className="card-img-top mt-3 w-50 h-50"
