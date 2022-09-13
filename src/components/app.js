@@ -4,6 +4,7 @@ import Home from "./Home";
 import Content from "./Content";
 import NavBar from "./NavBar";
 import axios from "axios";
+import User from "./User";
 
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
@@ -53,10 +54,15 @@ function App() {
 
   return (
     <div className="app d-flex flex-column justify-content-center">
-      <NavBar loggedInStatus={loggedInStatus} setScreen={setScreen} handleLogout={handleLogout} />
+      <NavBar
+        loggedInStatus={loggedInStatus}
+        setScreen={setScreen}
+        handleLogout={handleLogout}
+        user={user}
+      />
       <Switch>
         <Route exact path={"/"}>
-          <Content loggedInStatus={loggedInStatus}/>
+          <Content loggedInStatus={loggedInStatus} />
         </Route>
         <Route exact path={"/home"}>
           <Home
@@ -67,12 +73,10 @@ function App() {
             handleLogin={handleLogin}
           />
         </Route>
-        {/* <Route exact path={"/dashboard"}>
-          <Dashboard
-            loggedInStatus={loggedInStatus}
-            handleLogout={handleLogout}
-          />
-        </Route> */}
+
+        <Route exact path={"/user"}>
+          <User user={user} />
+        </Route>
       </Switch>
     </div>
   );

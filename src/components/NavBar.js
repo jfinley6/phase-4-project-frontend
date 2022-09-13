@@ -1,7 +1,14 @@
 import React from "react";
 import { useHistory } from "react-router";
+import User from "./User";
 
-function NavBar({ loggedInStatus, setScreen, handleLogout, handleNewPost }) {
+function NavBar({
+  user,
+  loggedInStatus,
+  setScreen,
+  handleLogout,
+  handleNewPost,
+}) {
   const history = useHistory();
 
   return (
@@ -15,6 +22,17 @@ function NavBar({ loggedInStatus, setScreen, handleLogout, handleNewPost }) {
       >
         Dev Blog
       </h2>
+      <div>
+        <button
+          onClick={() => {
+            history.push("/user");
+          }}
+          className="btn btn-primary my-2 my-sm-0  "
+        >
+          User
+        </button>
+      </div>
+
       {loggedInStatus === "NOT_LOGGED_IN" ? (
         <div>
           <button
@@ -42,7 +60,7 @@ function NavBar({ loggedInStatus, setScreen, handleLogout, handleNewPost }) {
         <div>
           <button
             onClick={() => {
-              history.push("/new")
+              history.push("/new");
             }}
             className="btn btn-primary my-2 mx-2 my-sm-0"
             type="submit"
