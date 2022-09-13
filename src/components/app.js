@@ -10,6 +10,7 @@ function App() {
   const [loggedInStatus, setLoggedInStatus] = useState("NOT_LOGGED_IN");
   const [user, setUser] = useState({});
   const [screen, setScreen] = useState(false);
+  const [storedPost, setStoredPost] = useState("");
 
   useEffect(() => {
     checkLoginStatus();
@@ -69,7 +70,7 @@ function App() {
           />
         </Route>
         <Route exact path={"/new"}>
-          <NewPost user={user}/>
+          <NewPost user={user} storedPost={storedPost} setStoredPost={setStoredPost}/>
         </Route>
       </Switch>
     </div>
