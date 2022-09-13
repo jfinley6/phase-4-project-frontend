@@ -3,6 +3,7 @@ import { Switch, Route, useHistory } from "react-router-dom";
 import Home from "./Home";
 import Content from "./Content";
 import NavBar from "./NavBar";
+import NewPost from "./NewPost";
 import axios from "axios";
 
 function App() {
@@ -67,12 +68,9 @@ function App() {
             handleLogin={handleLogin}
           />
         </Route>
-        {/* <Route exact path={"/dashboard"}>
-          <Dashboard
-            loggedInStatus={loggedInStatus}
-            handleLogout={handleLogout}
-          />
-        </Route> */}
+        <Route exact path={"/new"}>
+          <NewPost user={user}/>
+        </Route>
       </Switch>
     </div>
   );
