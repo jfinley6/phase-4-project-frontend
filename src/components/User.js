@@ -34,7 +34,7 @@ function User({ user }) {
               <div className="form-group">
                 <label className="col-sm-2 control-label">E-mail</label>
                 <div className="col-sm-10">
-                  <input type="email" className="form-control" />
+                  <input type="email" className="form-control" value={user.email} />
                 </div>
               </div>
               <div className="form-group"></div>
