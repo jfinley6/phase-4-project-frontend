@@ -1,20 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import { useParams } from 'react-router';
+import axios from 'axios';
 
 function PostDetail() {
         const [ post, setPost] = useState({});
         const { id } = useParams();
 
         useEffect(() => {
-            fetch(`/posts/${id}`).then((r) =>  {
-                r.json().then((post) =>
-                  setPost(post)
-                );
+            // fetch(`/posts/${id}`).then((r) =>  {
+            //     r.json().then((post) =>
+            //       setPost(post)
+            //     );
                
-            });
+            // });
+            axios.get(`http://localhost:3001/posts/${id}`, {
+              withCredentials: true,
+            }).then(response => setPost(response.data))
           }, [id]);
 
-          console.log(post)
 
         //   console.log(post)
         
@@ -44,6 +47,7 @@ function PostDetail() {
   return (
     <div>
         <h2>{post.subject}</h2>
+        <h2>{post.body}</h2>
     </div>
   )
 }
