@@ -13,7 +13,7 @@ function NavBar({ loggedInStatus, setScreen, handleLogout, handleNewPost }) {
         }}
         className="mx-3 mb-0"
       >
-        Navbar
+        Dev Blog
       </h2>
       {loggedInStatus === "NOT_LOGGED_IN" ? (
         <div>
