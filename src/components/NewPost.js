@@ -1,16 +1,26 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import axios from "axios";
 
-function NewPost({setStoredPost, storedPost, setStoredSubject, storedSubject}) {
+function NewPost({
+  setStoredPost,
+  storedPost,
+  setStoredSubject,
+  storedSubject,
+  user
+}) {
   const [value, setValue] = useState("");
   const [subject, setSubject] = useState("");
+  const [imgFile, setImgFile] = useState({});
+
+  const history = useHistory()
 
   useEffect(() => {
-    setValue(storedPost)
-    setSubject(storedSubject)
-  },[])
-
+    setValue(storedPost);
+    setSubject(storedSubject);
+  }, []);
 
   function handleSubjectChange(data) {
     setSubject(data.target.value);
@@ -18,16 +28,35 @@ function NewPost({setStoredPost, storedPost, setStoredSubject, storedSubject}) {
   }
 
   function handleChange(data) {
-    setValue(data)
-    setStoredPost(data)
+    setValue(data);
+    setStoredPost(data);
   }
 
   function handleClear() {
-    setValue("")
-    setSubject("")
-    setStoredPost("")
-    setStoredSubject("")
+    setValue("");
+    setSubject("");
+    setStoredPost("");
+    setStoredSubject("");
   }
+
+  function handleSubmit() {
+    axios.post("http://localhost:3001/posts", 
+    {
+      post: {
+        subject: subject,
+        body: value,
+        image_url: imgFile,
+        user_id: user.id
+      },
+    },
+        { withCredentials: true }
+    ).then(() => {
+      history.push("/")
+    })
+  }
+
+
+  console.log(imgFile)
 
   return (
     <div className="d-flex justify-content-center">
@@ -45,6 +74,9 @@ function NewPost({setStoredPost, storedPost, setStoredSubject, storedSubject}) {
             onChange={handleSubjectChange}
             value={subject}
           ></input>
+          <label type="email" className="form-label" htmlFor="exampleimage1">Image URL</label>
+          <input onChange={(e) => setImgFile(e.target.value)} id="exampleimage1" className="form-control" />
+          <div id="img-preview"></div>
         </div>
         <ReactQuill
           className="w-100 mb-1"
@@ -52,7 +84,14 @@ function NewPost({setStoredPost, storedPost, setStoredSubject, storedSubject}) {
           value={value}
           onChange={handleChange}
         />
-        <button onClick={handleClear} className="mt-5 btn btn-outline-danger">Clear All</button>
+        <div>
+          <button onClick={handleSubmit} className="mt-5 mx-2 btn btn-primary">
+            Submit
+          </button>
+          <button onClick={handleClear} className="mt-5 btn btn-outline-danger">
+            Clear All
+          </button>
+        </div>
       </div>
     </div>
   );
