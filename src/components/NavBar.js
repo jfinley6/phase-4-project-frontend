@@ -12,7 +12,7 @@ function NavBar({
   const history = useHistory();
 
   return (
-    <nav className="navbar navbar-light bg-light justify-content-between align-items-center">
+    <nav className="sticky-top navbar navbar-light bg-light justify-content-between align-items-center">
       <h2
         role="button"
         onClick={() => {

@@ -39,6 +39,7 @@ function NewPost({
     setStoredSubject("");
   }
 
+
   function handleSubmit() {
     axios.post("http://localhost:3001/posts", 
     {
@@ -54,9 +55,6 @@ function NewPost({
       history.push("/")
     })
   }
-
-
-  console.log(imgFile)
 
   return (
     <div className="d-flex justify-content-center">
@@ -83,6 +81,7 @@ function NewPost({
           theme="snow"
           value={value}
           onChange={handleChange}
+          
         />
         <div>
           <button onClick={handleSubmit} className="mt-5 mx-2 btn btn-primary">
