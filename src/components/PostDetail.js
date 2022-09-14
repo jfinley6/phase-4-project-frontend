@@ -22,12 +22,13 @@ function PostDetail() {
       });
   }, [id]);
 
+
   const allComment = comment.map((comment) => {
     return <Comment comment={comment} key={comment.id} />;
   });
 
   return (
-    <div className="blog-single gray-bg">
+    <div className="blog-single gray-bg d-flex justify-content-center">
       <div className="container">
         <div className="row align-items-start">
           <div className="col-lg-8 m-15px-tb">
@@ -47,7 +48,7 @@ function PostDetail() {
                   </div>
                   <div className="media-body">
                     <label>{username.username}</label>
-                    <span>{post.created_at}</span>
+                    <span>{post.created_at != undefined ? post.created_at.slice(0,10) : null}</span>
                   </div>
                 </div>
               </div>
