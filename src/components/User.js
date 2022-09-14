@@ -8,36 +8,59 @@ function User({ user }) {
   const [userName, setUserName] = useState({
     username: "",
   });
+  const [errors, setErrors] = useState([])
 
   function handleChange(event) {
     setUserName({
       ...userName,
-      [event.target.username]: event.target.value,
+      [event.target.id]: event.target.value,
     });
   }
-  // // function handleSubmit(event) {
-  // //   axios
-  // //     .post(
-  // //       "http://localhost:3001/users",
-  // //       {
-  // //         user: {
-  // //           username: username,
-  // //           // email: email,
-  // //           // password: password,
-  // //           // password_confirmation: password_confirmation,
-  // //         },
-  // //       },
-  // //       { withCredentials: true }
-  //     )
-  //     .then((response) => {
-  //       if (response.data.status === "created") {
-  //         handleSuccessfulAuth(response.data.user);
+  function handleSubmit(event) {
+    axios
+      .patch(
+        `http://localhost:3001/registrations/${user.id}`,
+        {
+          user: {
+            username: userName.username,
+            // email: email,
+            password: userName.password,
+            password_confirmation: userName.password,
+          },
+        },
+        { withCredentials: true }
+      )
+      
+  } 
+
+  
+  // async function updateUser(){
+  //   const updateData = {
+  //       username: userName.username
+  //   }
+  //   const config = {
+  //       method: 'PATCH',
+  //       headers: {
+  //           'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(updateData)
+  //   }
+  //   const res = await fetch(`/user/${user.id}`, config)
+  //       if (res.ok) {
+  //           setUserName({
+  //               username: '',
+  //           })
+  //           setErrors([])
+  //       } else {
+  //           const messages = await res.json()
+  //           setErrors(messages.errors)
   //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log("registration error", error);
-  //     });
-  //   event.preventDefault();
+  //   }
+
+  //   function handleSubmit(e){
+  //     e.preventDefault();
+  //     updateUser()
+  //   }
   // const [email, password_digest] = user;
   return (
     <div>
@@ -68,8 +91,10 @@ function User({ user }) {
                 <h4 className="col-md-10 control-label">{user.username}</h4>
                 <div className="form-group">
                   <input
-                    type="username"
+                    type="text"
                     className="form-control"
+                    id="username"
+                    value={userName.username}
                     onChange={handleChange}
                     placeholder="New Username"
                   />
@@ -117,7 +142,9 @@ function User({ user }) {
                     <input
                       type="password"
                       className="form-control"
-                      value="confirm-password"
+                      id="password"
+                      value={userName.password}
+                      onChange={handleChange}
                     />
                   </div>
                 </div>
@@ -126,7 +153,7 @@ function User({ user }) {
                 </div>
                 <div className="form-group">
                   <div className="col-sm-10 col-sm-offset-2">
-                    <button type="submit" className="btn btn-primary">
+                    <button type="submit" className="btn btn-primary" onClick={handleSubmit}>
                       Submit
                     </button>
                     <button type="reset" className="btn btn-default">
