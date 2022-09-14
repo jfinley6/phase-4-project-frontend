@@ -68,7 +68,7 @@ function App() {
       />
       <Switch>
         <Route exact path={"/"}>
-          <Content loggedInStatus={loggedInStatus} />
+          <Content loggedInStatus={loggedInStatus} user={user} />
         </Route>
         <Route exact path={"/home"}>
           <Home

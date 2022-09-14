@@ -1,8 +1,7 @@
 import React from "react";
 import {Link} from "react-router-dom"
-import User from "./User";
 
-function PostCard({ post }) {
+function PostCard({ post, user }) {
 
   return (
     <div className="col-sm-3 d-flex justify-content-center align-items-center flex-column border mb-3 shadow rounded">
@@ -19,9 +18,15 @@ function PostCard({ post }) {
             Created: {post.created_at.slice(0, -14)}
           </small>
         </p>
-        <Link className="btn btn-primary" to={`/posts/${post.id}`}>
-          Read
-        </Link>
+        <div>
+          <Link className="btn btn-primary mx-1" to={`/posts/${post.id}`}>
+            Read
+          </Link>
+          {user.id === post.user_id ? <button className="btn btn-danger" to={`/posts/${post.id}`}>
+            Delete
+          </button> : null}
+          
+        </div>
       </div>
     </div>
   );
