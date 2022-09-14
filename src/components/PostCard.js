@@ -12,9 +12,9 @@ function PostCard({ post }) {
         alt="..."
       />
       <div className="card-body d-flex flex-column align-items-center">
-        <h5 className="card-title">{post.subject}</h5>
-        <h6 className="card-title link-primary btn">{post.user.username}</h6>
-        <p className="card-text">
+        <h5 className="card-title mb-0">{post.subject}</h5>
+        <h6 className="card-title link-primary btn mb-0">{post.user.username}</h6>
+        <p className="card-text mb-1">
           <small className="text-muted">
             Created: {post.created_at.slice(0, -14)}
           </small>
