@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import PostCard from "./PostCard";
@@ -6,6 +7,12 @@ function Content({ loggedInStatus, user }) {
   const history = useHistory();
   const [post, setPost] = useState([]);
 
+  function handleDelete(id) {
+    axios.delete(`http://localhost:3001/posts/${id}`).then(() => {
+      setPost((post) => post.filter((item) => id !== item.id));
+    });
+  }
+
   useEffect(() => {
     fetch("http://localhost:3001/posts")
       .then((response) => response.json())
@@ -13,7 +20,16 @@ function Content({ loggedInStatus, user }) {
   }, []);
 
   const allPosts = post.map((post) => {
-    return <PostCard user={user} post={post} key={post.id} logged_in={logged_in} />;
+    return (
+      <PostCard
+        user={user}
+        post={post}
+        key={post.id}
+        setPost={setPost}
+        logged_in={logged_in}
+        handleDelete={handleDelete}
+      />
+    );
   });
 
   function logged_in() {
