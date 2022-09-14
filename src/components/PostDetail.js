@@ -28,34 +28,40 @@ function PostDetail() {
   });
 
   return (
-    <div className="blog-single gray-bg d-flex justify-content-center">
+    <div className="blog-single gray-bg d-flex justify-content-center pt-0">
       <div className="container">
-        <div className="row align-items-start">
+        <div className="row align-items-start flex-d justify-content-center">
           <div className="col-lg-8 m-15px-tb">
-            <article className="article">
+            <article className="article d-flex flex-column text-center">
               <div className="article-img">
                 <img src={post.image_url} title="" alt="" />
               </div>
               <div className="article-title">
-                <h2>{post.subject}</h2>
+                <h1 className="d-flex flex-column align-items-start">
+                  {post.subject}
+                </h1>
                 <div className="media">
                   <div className="avatar">
                     <img
-                      src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                      src="https://media.istockphoto.com/vectors/default-avatar-profile-icon-vector-vector-id1337144146?b=1&k=20&m=1337144146&s=170667a&w=0&h=ys-RUZbXzQ-FQdLstHeWshI4ViJuEhyEa4AzQNQ0rFI="
                       title=""
                       alt=""
                     />
                   </div>
-                  <div className="media-body">
+                  <div className="media-body d-flex flex-column align-items-start">
                     <label>{username.username}</label>
-                    <span>{post.created_at != undefined ? post.created_at.slice(0,10) : null}</span>
+                    <span>
+                      {post.created_at != undefined
+                        ? post.created_at.slice(0, 10)
+                        : null}
+                    </span>
                   </div>
                 </div>
               </div>
               <div className="article-content">
-                <p>{post.body}</p>
+                <div className="d-flex flex-column align-items-start" dangerouslySetInnerHTML={{__html: post.body}}></div>
               </div>
-              <div className="nav tag-cloud">
+              {/* <div className="nav tag-cloud">
                 <a href="#">Design</a>
                 <a href="#">Development</a>
                 <a href="#">Travel</a>
@@ -63,7 +69,7 @@ function PostDetail() {
                 <a href="#">Marketing</a>
                 <a href="#">Research</a>
                 <a href="#">Managment</a>
-              </div>
+              </div> */}
             </article>
             <div className="panel panel-info">
               <div className="panel-heading">Comment panel</div>
