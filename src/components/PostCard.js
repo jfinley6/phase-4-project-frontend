@@ -1,7 +1,9 @@
 import React from "react";
 import {Link} from "react-router-dom"
 
-function PostCard({ post, user }) {
+function PostCard({ post, user, setPost, handleDelete }) {
+
+  
 
   return (
     <div className="col-sm-3 d-flex justify-content-center align-items-center flex-column border mb-3 shadow rounded">
@@ -22,7 +24,9 @@ function PostCard({ post, user }) {
           <Link className="btn btn-primary mx-1" to={`/posts/${post.id}`}>
             Read
           </Link>
-          {user.id === post.user_id ? <button className="btn btn-danger" to={`/posts/${post.id}`}>
+          {user.id === post.user_id ? <button onClick={() => {
+            handleDelete(post.id)
+          }} className="btn btn-danger">
             Delete
           </button> : null}
           

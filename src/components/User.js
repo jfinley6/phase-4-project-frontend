@@ -23,7 +23,6 @@ function User({ user }) {
         {
           user: {
             username: userName.username,
-            // email: email,
             password: userName.password,
             password_confirmation: userName.password,
           },
@@ -33,35 +32,6 @@ function User({ user }) {
       
   } 
 
-  
-  // async function updateUser(){
-  //   const updateData = {
-  //       username: userName.username
-  //   }
-  //   const config = {
-  //       method: 'PATCH',
-  //       headers: {
-  //           'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(updateData)
-  //   }
-  //   const res = await fetch(`/user/${user.id}`, config)
-  //       if (res.ok) {
-  //           setUserName({
-  //               username: '',
-  //           })
-  //           setErrors([])
-  //       } else {
-  //           const messages = await res.json()
-  //           setErrors(messages.errors)
-  //       }
-  //   }
-
-  //   function handleSubmit(e){
-  //     e.preventDefault();
-  //     updateUser()
-  //   }
-  // const [email, password_digest] = user;
   return (
     <div>
       <link
