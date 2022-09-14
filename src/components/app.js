@@ -94,7 +94,7 @@ function App() {
           <User user={user} />
         </Route>
         <Route exact path="/posts/:id">
-          <PostDetail />
+          <PostDetail user={user} />
         </Route>
       </Switch>
     </div>

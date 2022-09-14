@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router";
+import { useParams, useHistory } from "react-router";
 import axios from "axios";
 import "../style/PostDetail.css";
 import Comment from "./Comment";
 
-function PostDetail() {
+function PostDetail({user}) {
   const [post, setPost] = useState({});
   const [comment, setComment] = useState([]);
   const { id } = useParams();
   const [username, setUserName] = useState({});
+  const[newComment, setNewComment] = useState("");
+
+  const history = useHistory()
 
   useEffect(() => {
     axios
@@ -21,6 +24,29 @@ function PostDetail() {
         setUserName(response.data.user)
       });
   }, [id]);
+
+  function handleChange(e){
+        setNewComment(e.target.value);
+  }
+
+  function handleClear(){
+    setNewComment("");
+  }
+
+  function handleSubmit(){
+    axios.post("http://localhost:3001/comments",
+    {
+        comment: {
+            body: newComment,
+            user_id: user.id,
+            post_id: post.id
+        },
+    },
+    { withCredentials: true }
+    ).then(() => {
+      handleClear();
+    })
+  }
 
 
   const allComment = comment.map((comment) => {
@@ -78,9 +104,11 @@ function PostDetail() {
                   className="form-control"
                   placeholder="write a comment..."
                   rows="3"
+                  value={newComment}
+                  onChange={handleChange}
                 ></textarea>
                 <br />
-                <button type="button" className="btn btn-info pull-right">
+                <button type="button" onClick= {handleSubmit} className="btn btn-info pull-right">
                   Post
                 </button>
                 <div className="clearfix"></div>
