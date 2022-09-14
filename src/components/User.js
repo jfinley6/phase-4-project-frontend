@@ -10,24 +10,36 @@ function User({ user }) {
   const [userName, setUserName] = useState({
     username: "",
   });
+  const [errors, setErrors] = useState([])
 
   function handleChange(event) {
     setUserName({
       ...userName,
-      [event.target.username]: event.target.value,
+      [event.target.id]: event.target.value,
     });
   }
   function handleSubmit(event) {
     axios
       .patch(
+<<<<<<< HEAD
         "http://localhost:3001/registrations",
         {
           user: {
             username: user.username,
+=======
+        `http://localhost:3001/registrations/${user.id}`,
+        {
+          user: {
+            username: userName.username,
+            // email: email,
+            password: userName.password,
+            password_confirmation: userName.password,
+>>>>>>> main
           },
         },
         { withCredentials: true }
       )
+<<<<<<< HEAD
       .then((response) => {
         if (response.data.status === "created") {
           handleSuccessfulAuth(response.data.user);
@@ -39,6 +51,40 @@ function User({ user }) {
     event.preventDefault();
   }
 
+=======
+      
+  } 
+
+  
+  // async function updateUser(){
+  //   const updateData = {
+  //       username: userName.username
+  //   }
+  //   const config = {
+  //       method: 'PATCH',
+  //       headers: {
+  //           'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(updateData)
+  //   }
+  //   const res = await fetch(`/user/${user.id}`, config)
+  //       if (res.ok) {
+  //           setUserName({
+  //               username: '',
+  //           })
+  //           setErrors([])
+  //       } else {
+  //           const messages = await res.json()
+  //           setErrors(messages.errors)
+  //       }
+  //   }
+
+  //   function handleSubmit(e){
+  //     e.preventDefault();
+  //     updateUser()
+  //   }
+  // const [email, password_digest] = user;
+>>>>>>> main
   return (
     <div>
       <link
@@ -69,8 +115,10 @@ function User({ user }) {
                 <h4 className="col-md-10 control-label">{user.username}</h4>
                 <div className="form-group">
                   <input
-                    type="username"
+                    type="text"
                     className="form-control"
+                    id="username"
+                    value={userName.username}
                     onChange={handleChange}
                     placeholder="New Username"
                     defaultValue="New Username"
@@ -99,11 +147,15 @@ function User({ user }) {
                     Current password
                   </label>
                   <div className="col-sm-10">
+<<<<<<< HEAD
                     <input
                       type="password"
                       className="form-control"
                       defaultValue="Password"
                     />
+=======
+                    <input type="password" className="form-control" value="" />
+>>>>>>> main
                   </div>
                 </div>
                 <div className="form-group">
@@ -112,7 +164,11 @@ function User({ user }) {
                     <input
                       type="password"
                       className="form-control"
+<<<<<<< HEAD
                       defaultValue="new-password"
+=======
+                      value="new-password"
+>>>>>>> main
                     />
                   </div>
                 </div>
@@ -124,7 +180,13 @@ function User({ user }) {
                     <input
                       type="password"
                       className="form-control"
+<<<<<<< HEAD
                       defaultValue="confirm-password"
+=======
+                      id="password"
+                      value={userName.password}
+                      onChange={handleChange}
+>>>>>>> main
                     />
                   </div>
                 </div>
@@ -133,11 +195,15 @@ function User({ user }) {
                 </div>
                 <div className="form-group">
                   <div className="col-sm-10 col-sm-offset-2">
+<<<<<<< HEAD
                     <button
                       type="submit"
                       className="btn btn-primary"
                       onClick={handleSubmit}
                     >
+=======
+                    <button type="submit" className="btn btn-primary" onClick={handleSubmit}>
+>>>>>>> main
                       Submit
                     </button>
                     <button type="reset" className="btn btn-default">
@@ -153,5 +219,6 @@ function User({ user }) {
     </div>
   );
 }
+
 
 export default User;

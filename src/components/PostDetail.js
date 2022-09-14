@@ -1,55 +1,98 @@
-import React, {useState, useEffect} from 'react'
-import { useParams } from 'react-router';
-import axios from 'axios';
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
+import axios from "axios";
+import "../style/PostDetail.css";
+import Comment from "./Comment";
 
 function PostDetail() {
-        const [ post, setPost] = useState({});
-        const { id } = useParams();
+  const [post, setPost] = useState({});
+  const [comment, setComment] = useState([]);
+  const { id } = useParams();
+  const [username, setUserName] = useState({});
 
-        useEffect(() => {
-            // fetch(`/posts/${id}`).then((r) =>  {
-            //     r.json().then((post) =>
-            //       setPost(post)
-            //     );
-               
-            // });
-            axios.get(`http://localhost:3001/posts/${id}`, {
-              withCredentials: true,
-            }).then(response => setPost(response.data))
-          }, [id]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3001/posts/${id}`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        setPost(response.data);
+        setComment(response.data.comments);
+        setUserName(response.data.user)
+      });
+  }, [id]);
 
 
-        //   console.log(post)
-        
-        // const fetchPost = async () => {
-        //     const res = await fetch(`/posts/${id}`)
-        //     console.log(res)
-        //     if (res.ok) {
-        //         const postJSON = await res.json()
-        //         setPost({data: postJSON, error: null, status: "resolved"})
-        //         console.log("Success")
-        //     } else {
-        //         const postErr = await res.json()
-        //         setPost({data: null, error: postErr, status: "rejected"})
-        //         console.log("failed")
-        //     }
-        // }   
+  const allComment = comment.map((comment) => {
+    return <Comment comment={comment} key={comment.id} />;
+  });
 
-        
-
-        // useEffect(() => {
-        //     fetchPost()
-        //         .catch(console.error)
-        //   }, [id])
-
-          if (status === "pending") return <h2>Loading...</h2>;
-  if (status === "rejected") return <h2>Error: {error.error}</h2>;
   return (
-    <div>
-        <h2>{post.subject}</h2>
-        <h2>{post.body}</h2>
+    <div className="blog-single gray-bg d-flex justify-content-center pt-0">
+      <div className="container">
+        <div className="row align-items-start flex-d justify-content-center">
+          <div className="col-lg-8 m-15px-tb">
+            <article className="article d-flex flex-column text-center">
+              <div className="article-img">
+                <img src={post.image_url} title="" alt="" />
+              </div>
+              <div className="article-title">
+                <h1 className="d-flex flex-column align-items-start">
+                  {post.subject}
+                </h1>
+                <div className="media">
+                  <div className="avatar">
+                    <img
+                      src="https://media.istockphoto.com/vectors/default-avatar-profile-icon-vector-vector-id1337144146?b=1&k=20&m=1337144146&s=170667a&w=0&h=ys-RUZbXzQ-FQdLstHeWshI4ViJuEhyEa4AzQNQ0rFI="
+                      title=""
+                      alt=""
+                    />
+                  </div>
+                  <div className="media-body d-flex flex-column align-items-start">
+                    <label>{username.username}</label>
+                    <span>
+                      {post.created_at != undefined
+                        ? post.created_at.slice(0, 10)
+                        : null}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div className="article-content">
+                <div className="d-flex flex-column align-items-start" dangerouslySetInnerHTML={{__html: post.body}}></div>
+              </div>
+              {/* <div className="nav tag-cloud">
+                <a href="#">Design</a>
+                <a href="#">Development</a>
+                <a href="#">Travel</a>
+                <a href="#">Web Design</a>
+                <a href="#">Marketing</a>
+                <a href="#">Research</a>
+                <a href="#">Managment</a>
+              </div> */}
+            </article>
+            <div className="panel panel-info">
+              <div className="panel-heading">Comment panel</div>
+              <div className="panel-body">
+                <textarea
+                  className="form-control"
+                  placeholder="write a comment..."
+                  rows="3"
+                ></textarea>
+                <br />
+                <button type="button" className="btn btn-info pull-right">
+                  Post
+                </button>
+                <div className="clearfix"></div>
+                <hr />
+              </div>
+            </div>
+            <div>{allComment}</div>
+          </div>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
 
-export default PostDetail
+export default PostDetail;

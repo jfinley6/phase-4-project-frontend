@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import PostCard from "./PostCard";
 
-function Content({ loggedInStatus }) {
+function Content({ loggedInStatus, user }) {
   const history = useHistory();
   const [post, setPost] = useState([]);
 
@@ -13,7 +13,7 @@ function Content({ loggedInStatus }) {
   }, []);
 
   const allPosts = post.map((post) => {
-    return <PostCard post={post} key={post.id} logged_in={logged_in} />;
+    return <PostCard user={user} post={post} key={post.id} logged_in={logged_in} />;
   });
 
   function logged_in() {
