@@ -4,11 +4,11 @@ import { useHistory } from "react-router";
 import axios from "axios";
 
 function User({ user }) {
-  const history = useHistory();
   const [userName, setUserName] = useState({
     username: "",
   });
-  const [errors, setErrors] = useState([])
+
+  const history = useHistory()
 
   function handleChange(event) {
     setUserName({
@@ -17,20 +17,20 @@ function User({ user }) {
     });
   }
   function handleSubmit(event) {
-    axios
-      .patch(
-        `http://localhost:3001/registrations/${user.id}`,
-        {
-          user: {
-            username: userName.username,
-            password: userName.password,
-            password_confirmation: userName.password,
-          },
+    event.preventDefault()
+    axios.patch(
+      `http://localhost:3001/registrations/${user.id}`,
+      {
+        user: {
+          username: userName.username,
+          password: userName.password,
+          password_confirmation: userName.password,
         },
-        { withCredentials: true }
-      )
-      
-  } 
+      },
+      { withCredentials: true }
+    );
+    setUser({ ...user, username: userName.username });
+  }
 
   return (
     <div>
@@ -41,12 +41,12 @@ function User({ user }) {
       <div className="container bootstrap snippets bootdeys">
         <div className="row">
           <div className="col-xs-12 col-sm-9">
-            <div className="panel panel-default">
-              <div className="panel-body text-center">
+            <div className="panel">
+              <div className="">
                 <img
                   src="https://media.istockphoto.com/vectors/default-avatar-profile-icon-vector-vector-id1337144146?b=1&k=20&m=1337144146&s=170667a&w=0&h=ys-RUZbXzQ-FQdLstHeWshI4ViJuEhyEa4AzQNQ0rFI="
-                  className="img-circle profile-avatar"
                   alt="User avatar"
+                  className="w-25 mb-2 mt-2"
                 />
               </div>
             </div>
@@ -68,6 +68,13 @@ function User({ user }) {
                     onChange={handleChange}
                     placeholder="New Username"
                   />
+                  <button
+                    type="submit"
+                    className="btn btn-primary mt-2"
+                    onClick={handleSubmit}
+                  >
+                    Submit
+                  </button>
                 </div>
               </form>
               <div className="panel-body">
@@ -80,65 +87,11 @@ function User({ user }) {
                 <div className="form-group"></div>
               </div>
             </div>
-
-            <div className="panel panel-default">
-              <div className="panel-heading">
-                <h4 className="panel-title">Security</h4>
-              </div>
-              <div className="panel-body">
-                <div className="form-group">
-                  <label className="col-sm-2 control-label">
-                    Current password
-                  </label>
-                  <div className="col-sm-10">
-                    <input type="password" className="form-control" value="" />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label className="col-sm-2 control-label">New password</label>
-                  <div className="col-sm-10">
-                    <input
-                      type="password"
-                      className="form-control"
-                      value="new-password"
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <label className="col-sm-2 control-label">
-                    Confirm password
-                  </label>
-                  <div className="col-sm-10">
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="password"
-                      value={userName.password}
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-                <div className="form-group">
-                  <div className="col-sm-10 col-sm-offset-2"></div>
-                </div>
-                <div className="form-group">
-                  <div className="col-sm-10 col-sm-offset-2">
-                    <button type="submit" className="btn btn-primary" onClick={handleSubmit}>
-                      Submit
-                    </button>
-                    <button type="reset" className="btn btn-default">
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-
 
 export default User;
