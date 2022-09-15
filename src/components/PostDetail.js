@@ -10,8 +10,10 @@ function PostDetail({user, loggedInStatus}) {
   const { id } = useParams();
   const [username, setUserName] = useState({});
   const[newComment, setNewComment] = useState("");
-
   const history = useHistory()
+
+  const [picture, setPicture] = useState("")
+
 
   useEffect(() => {
     axios
@@ -22,6 +24,7 @@ function PostDetail({user, loggedInStatus}) {
         setPost(response.data);
         setComment(response.data.comments);
         setUserName(response.data.user)
+        setPicture(response.data.user.picture)
       });
   }, [id]);
   console.log(comment)
@@ -69,7 +72,12 @@ function PostDetail({user, loggedInStatus}) {
           <div className="col-lg-8 m-15px-tb">
             <article className="article d-flex flex-column text-center">
               <div className="article-img">
-                <img className="h-50 w-75" src={post.image_url} title="" alt="" />
+                <img
+                  className="h-50 w-75"
+                  src={post.image_url}
+                  title=""
+                  alt=""
+                />
               </div>
               <div className="article-title">
                 <h1 className="d-flex flex-column align-items-start">
@@ -77,11 +85,7 @@ function PostDetail({user, loggedInStatus}) {
                 </h1>
                 <div className="media">
                   <div className="avatar">
-                    <img
-                      src="https://media.istockphoto.com/vectors/default-avatar-profile-icon-vector-vector-id1337144146?b=1&k=20&m=1337144146&s=170667a&w=0&h=ys-RUZbXzQ-FQdLstHeWshI4ViJuEhyEa4AzQNQ0rFI="
-                      title=""
-                      alt=""
-                    />
+                    <img src={picture} title="" alt="" />
                   </div>
                   <div className="media-body d-flex flex-column align-items-start">
                     <label>{username.username}</label>
@@ -90,11 +94,17 @@ function PostDetail({user, loggedInStatus}) {
                         ? post.created_at.slice(0, 10)
                         : null}
                     </span>
+
+
+
                   </div>
                 </div>
               </div>
               <div className="article-content">
-                <div className="d-flex flex-column align-items-start" dangerouslySetInnerHTML={{__html: post.body}}></div>
+                <div
+                  className="d-flex flex-column align-items-start"
+                  dangerouslySetInnerHTML={{ __html: post.body }}
+                ></div>
               </div>
             </article>
             <div className="panel panel-info">

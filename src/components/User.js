@@ -1,18 +1,44 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router";
 import axios from "axios";
 
 function User({ user, setUser }) {
   const [userName, setUserName] = useState({
     username: "",
   });
-  const [error, setError] = useState("")
+  const [pictureURL, setPictureURL] = useState("");
+  const [error, setError] = useState("");
 
   function handleChange(event) {
     setUserName({
       ...userName,
       [event.target.id]: event.target.value,
     });
+  }
+
+  function handleImageSubmit(event) {
+    event.preventDefault();
+    let updatedPictureURL = pictureURL;
+    let updatedPicture = { picture: updatedPictureURL };
+
+    axios
+      .patch(
+        `http://localhost:3001/picture/${user.id}`,
+        {
+          user: {
+            picture: updatedPictureURL,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        setError("");
+        setUser((user) => ({
+          ...user,
+          ...updatedPicture,
+        }));
+        setPictureURL("")
+      })
+
   }
 
   function handleSubmit(event) {
@@ -31,7 +57,7 @@ function User({ user, setUser }) {
         { withCredentials: true }
       )
       .then(() => {
-        setError("")
+        setError("");
         setUser((user) => ({
           ...user,
           ...updatedValue,
@@ -53,12 +79,29 @@ function User({ user, setUser }) {
         <div className="row">
           <div className="col-xs-12 col-sm-9">
             <div className="panel">
-              <div>
+              <div className="d-flex flex-end">
                 <img
-                  src="https://media.istockphoto.com/vectors/default-avatar-profile-icon-vector-vector-id1337144146?b=1&k=20&m=1337144146&s=170667a&w=0&h=ys-RUZbXzQ-FQdLstHeWshI4ViJuEhyEa4AzQNQ0rFI="
+                  src={user.picture}
                   alt="User avatar"
                   className="w-25 mb-2 mt-2"
                 />
+                <div className="d-flex flex-column justify-content-end mt-3 mb-2 mx-2 w-100">
+                  <form onSubmit={handleImageSubmit}>
+                    <input
+                      type="url"
+                      className="form-control w-100"
+                      id="picture"
+                      value={pictureURL}
+                      onChange={(event) => setPictureURL(event.target.value)}
+                      placeholder="New Profile Picture URL"
+                      required
+                      autoComplete="off"
+                    />
+                    <button type="submit" className="btn btn-primary mt-2 w-25">
+                      Submit
+                    </button>
+                  </form>
+                </div>
               </div>
             </div>
             <div className="panel panel-default">
@@ -67,7 +110,7 @@ function User({ user, setUser }) {
               </div>
             </div>
             <div className="panel-body">
-              <form className="form-group-1">
+              <form className="form-group-1" onSubmit={handleSubmit}>
                 <label className="col-sm-2 control-label">Email</label>
                 <h3 className="col-md-10 control-label">{user.email}</h3>
                 <label className="col-sm-2 control-label">Username</label>
@@ -80,13 +123,13 @@ function User({ user, setUser }) {
                     value={userName.username}
                     onChange={handleChange}
                     placeholder="New Username"
+                    required
+                    autoComplete="off"
                   />
-                  {error === "" ? null : <div className="text-danger">{error}</div>}
-                  <button
-                    type="submit"
-                    className="btn btn-primary mt-2"
-                    onClick={handleSubmit}
-                  >
+                  {error === "" ? null : (
+                    <div className="text-danger">{error}</div>
+                  )}
+                  <button type="submit" className="btn btn-primary mt-2">
                     Submit
                   </button>
                 </div>
