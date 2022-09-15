@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router";
-// import {} from "react-icons";
 import axios from "axios";
 
 function User({ user }) {
   const [userName, setUserName] = useState({
     username: "",
   });
-
-  const history = useHistory()
 
   function handleChange(event) {
     setUserName({
@@ -77,15 +74,7 @@ function User({ user }) {
                   </button>
                 </div>
               </form>
-              <div className="panel-body">
-                <div className="form-group-2">
-                  <label className="col-sm-2 control-label">E-mail</label>
-                  <div className="col-sm-10">
-                    <h4>{user.email}</h4>
-                  </div>
-                </div>
-                <div className="form-group"></div>
-              </div>
+              
             </div>
           </div>
         </div>

@@ -61,18 +61,9 @@ function PostDetail() {
               <div className="article-content">
                 <div className="d-flex flex-column align-items-start" dangerouslySetInnerHTML={{__html: post.body}}></div>
               </div>
-              {/* <div className="nav tag-cloud">
-                <a href="#">Design</a>
-                <a href="#">Development</a>
-                <a href="#">Travel</a>
-                <a href="#">Web Design</a>
-                <a href="#">Marketing</a>
-                <a href="#">Research</a>
-                <a href="#">Managment</a>
-              </div> */}
             </article>
             <div className="panel panel-info">
-              <div className="panel-heading">Comment panel</div>
+              <div className="panel-heading">Comments</div>
               <div className="panel-body">
                 <textarea
                   className="form-control"

@@ -52,6 +52,7 @@ function NewPost({
     },
         { withCredentials: true }
     ).then(() => {
+      handleClear()
       history.push("/")
     })
   }
