@@ -14,7 +14,6 @@ function PostDetail({user, loggedInStatus}) {
 
   const [picture, setPicture] = useState("")
 
-
   useEffect(() => {
     axios
       .get(`http://localhost:3001/posts/${id}`, {
@@ -27,7 +26,6 @@ function PostDetail({user, loggedInStatus}) {
         setPicture(response.data.user.picture)
       });
   }, [id]);
-  console.log(comment)
 
   function handleChange(e){
         setNewComment(e.target.value);
@@ -38,7 +36,8 @@ function PostDetail({user, loggedInStatus}) {
     setNewComment("");
   }
 
-  function handleSubmit(){
+  function handleSubmit(event){
+    event.preventDefault()
     axios.post("http://localhost:3001/comments",
     {
         comment: {
@@ -56,8 +55,13 @@ function PostDetail({user, loggedInStatus}) {
       .then((response) => {
         
         setComment(response.data.comments);
-      });
-      // setAllComments(comment => [...comment, newElement]);
+      }).then(() => {
+        document.getElementById("commentButton").scrollIntoView({
+          behavior: "smooth",
+        });
+
+      })
+
     })
   }
 
@@ -110,18 +114,22 @@ function PostDetail({user, loggedInStatus}) {
             <div className="panel panel-info">
               <div className="panel-heading">Comments</div>
               <div className="panel-body">
-                <textarea
-                  className="form-control"
-                  placeholder="write a comment..."
-                  rows="3"
-                  value={newComment}
-                  onChange={handleChange}
-                ></textarea>
-                <br />
-                {(loggedInStatus=="NOT_LOGGED_IN")? "Please Login to Comment" :(
-                <button type="button" onClick= {handleSubmit} className="btn btn-info pull-right">
-                  Post
-                </button>)}
+                <form onSubmit={handleSubmit}>
+                  <textarea
+                    type="text"
+                    className="form-control"
+                    placeholder="Write a comment..."
+                    rows="3"
+                    value={newComment}
+                    onChange={handleChange}
+                    required
+                  ></textarea>
+                  <br />
+                  {(loggedInStatus=="NOT_LOGGED_IN")? "Please Login to Comment" :(
+                  <button type="submit" id="commentButton" className="btn btn-info pull-right">
+                    Post
+                  </button>)}
+                </form>
                 <div className="clearfix"></div>
                 <hr />
               </div>
