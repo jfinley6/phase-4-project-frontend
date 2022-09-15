@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router";
+import { useParams, useHistory, Redirect } from "react-router";
 import axios from "axios";
 import "../style/PostDetail.css";
 import Comment from "./Comment";
 
-function PostDetail({user}) {
+function PostDetail({user, loggedInStatus}) {
   const [post, setPost] = useState({});
   const [comment, setComment] = useState([]);
   const { id } = useParams();
@@ -24,9 +24,11 @@ function PostDetail({user}) {
         setUserName(response.data.user)
       });
   }, [id]);
+  console.log(comment)
 
   function handleChange(e){
         setNewComment(e.target.value);
+       
   }
 
   function handleClear(){
@@ -45,9 +47,16 @@ function PostDetail({user}) {
     { withCredentials: true }
     ).then(() => {
       handleClear();
+      axios.get(`http://localhost:3001/posts/${id}`, {
+        withCredentials: true,
+      })
+      .then((response) => {
+        
+        setComment(response.data.comments);
+      });
+      // setAllComments(comment => [...comment, newElement]);
     })
   }
-
 
   const allComment = comment.map((comment) => {
     return <Comment comment={comment} key={comment.id} />;
@@ -99,9 +108,10 @@ function PostDetail({user}) {
                   onChange={handleChange}
                 ></textarea>
                 <br />
+                {(loggedInStatus=="NOT_LOGGED_IN")? "Please Login to Comment" :(
                 <button type="button" onClick= {handleSubmit} className="btn btn-info pull-right">
                   Post
-                </button>
+                </button>)}
                 <div className="clearfix"></div>
                 <hr />
               </div>

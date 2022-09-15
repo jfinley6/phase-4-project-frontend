@@ -94,7 +94,7 @@ function App() {
           <User user={user} setUser={setUser}/>
         </Route>
         <Route exact path="/posts/:id">
-          <PostDetail user={user} />
+          <PostDetail user={user} loggedInStatus={loggedInStatus} />
         </Route>
       </Switch>
     </div>
