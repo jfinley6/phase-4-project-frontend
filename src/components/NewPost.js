@@ -52,6 +52,7 @@ function NewPost({
     },
         { withCredentials: true }
     ).then(() => {
+      handleClear()
       history.push("/")
     })
   }
@@ -66,23 +67,30 @@ function NewPost({
           </label>
           <input
             type="email"
-            className="form-control"
+            className="form-control w-75"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
             onChange={handleSubjectChange}
             value={subject}
           ></input>
-          <label type="email" className="form-label" htmlFor="exampleimage1">Image URL</label>
-          <input onChange={(e) => setImgFile(e.target.value)} id="exampleimage1" className="form-control" />
+          <label type="email" className="form-label" htmlFor="exampleimage1">
+            Image URL
+          </label>
+          <input
+            onChange={(e) => setImgFile(e.target.value)}
+            id="exampleimage1"
+            className="form-control w-75"
+          />
           <div id="img-preview"></div>
         </div>
-        <ReactQuill
-          className="w-100 mb-1"
-          theme="snow"
-          value={value}
-          onChange={handleChange}
-          
-        />
+        <div className="w-75 bg-white">
+          <ReactQuill
+            className="w-100"
+            theme="snow"
+            value={value}
+            onChange={handleChange}
+          />
+        </div>
         <div>
           <button onClick={handleSubmit} className="mt-5 mx-2 btn btn-primary">
             Submit

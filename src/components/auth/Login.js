@@ -54,6 +54,7 @@ function Login({ handleSuccessfulAuth, setScreen }) {
           value={email}
           onChange={handleChange}
           required
+          autoComplete="off"
         />
       </div>
       <div className="form-group d-flex flex-column align-items-center">
@@ -67,6 +68,7 @@ function Login({ handleSuccessfulAuth, setScreen }) {
           value={password}
           onChange={handleChange}
           required
+          autoComplete="off"
         />
       </div>
       <button className="btn btn-primary mt-2" type="submit">

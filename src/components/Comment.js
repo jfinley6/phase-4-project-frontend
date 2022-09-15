@@ -17,13 +17,13 @@ function Comment({ comment }) {
                 </a>
                 <div className="media-body">
                   <span className="text-muted pull-right">
-                    <small className="text-muted">
-                      {comment.created_at.slice(0, 10)} |{" "}
-                    </small>
+                    <strong >
+                      {comment.user.username} |{" "}
+                    </strong>
                   </span>
-                  <strong className="text-success">
-                    {comment.user.username}
-                  </strong>
+                  <small>
+                    {comment.created_at.slice(0, 10)}
+                  </small>
                   <p>{comment.body}</p>
                 </div>
               </li>

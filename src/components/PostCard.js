@@ -1,12 +1,10 @@
 import React from "react";
 import {Link} from "react-router-dom"
 
-function PostCard({ post, user, setPost, handleDelete }) {
-
-  
+function PostCard({ post, user, handleDelete }) {
 
   return (
-    <div className="col-sm-3 d-flex justify-content-center align-items-center flex-column border mb-3 shadow rounded">
+    <div className="col-sm-3 d-flex justify-content-center border-dark align-items-center flex-column border mb-3 shadow-lg rounded">
       <img
         src={post.image_url}
         className="card-img-top mt-3 w-50 h-50"
