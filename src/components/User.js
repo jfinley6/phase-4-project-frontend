@@ -64,8 +64,8 @@ function User({ user, setUser }) {
         }));
         setUserName({ username: "" });
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        setError("That username has already been taken")
       });
   }
 
