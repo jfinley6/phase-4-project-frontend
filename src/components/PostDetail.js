@@ -25,11 +25,10 @@ function PostDetail({user, loggedInStatus}) {
         setUserName(response.data.user)
         setPicture(response.data.user.picture)
       });
-  }, [id]);
+  }, [id, comment]);
 
   function handleChange(e){
         setNewComment(e.target.value);
-       
   }
 
   function handleClear(){
@@ -65,6 +64,12 @@ function PostDetail({user, loggedInStatus}) {
     })
   }
 
+  function goToComments() {
+    document.getElementById("comments").scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+
   const allComment = comment.map((comment) => {
     return <Comment comment={comment} key={comment.id} />;
   });
@@ -98,9 +103,11 @@ function PostDetail({user, loggedInStatus}) {
                         ? post.created_at.slice(0, 10)
                         : null}
                     </span>
-
-
-
+                    <button onClick={goToComments} className="btn btn-outline-primary">
+                      <span>
+                        {post.comments === undefined ? null : post.comments.length} comments
+                      </span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -112,7 +119,7 @@ function PostDetail({user, loggedInStatus}) {
               </div>
             </article>
             <div className="panel panel-info">
-              <div className="panel-heading">Comments</div>
+              <div id="comments" className="panel-heading">Comments</div>
               <div className="panel-body">
                 <form onSubmit={handleSubmit}>
                   <textarea
@@ -125,10 +132,17 @@ function PostDetail({user, loggedInStatus}) {
                     required
                   ></textarea>
                   <br />
-                  {(loggedInStatus=="NOT_LOGGED_IN")? "Please Login to Comment" :(
-                  <button type="submit" id="commentButton" className="btn btn-info pull-right">
-                    Post
-                  </button>)}
+                  {loggedInStatus == "NOT_LOGGED_IN" ? (
+                    "Please Login to Comment"
+                  ) : (
+                    <button
+                      type="submit"
+                      id="commentButton"
+                      className="btn btn-info pull-right"
+                    >
+                      Post
+                    </button>
+                  )}
                 </form>
                 <div className="clearfix"></div>
                 <hr />
