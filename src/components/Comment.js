@@ -1,6 +1,7 @@
 import React from "react";
 
 function Comment({ comment }) {
+
   return (
     <div className="container border-bottom mb-2">
       <div className="row bootstrap snippets bootdeys">
@@ -10,7 +11,7 @@ function Comment({ comment }) {
               <li className="media mb-0">
                 <a href="#" className="pull-left">
                   <img
-                    src="https://media.istockphoto.com/vectors/default-avatar-profile-icon-vector-vector-id1337144146?b=1&k=20&m=1337144146&s=170667a&w=0&h=ys-RUZbXzQ-FQdLstHeWshI4ViJuEhyEa4AzQNQ0rFI="
+                    src={comment.user.picture}
                     alt=""
                     className="img-circle"
                   />

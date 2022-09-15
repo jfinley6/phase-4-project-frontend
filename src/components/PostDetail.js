@@ -9,6 +9,7 @@ function PostDetail() {
   const [comment, setComment] = useState([]);
   const { id } = useParams();
   const [username, setUserName] = useState({});
+  const [picture, setPicture] = useState("")
 
   useEffect(() => {
     axios
@@ -19,6 +20,7 @@ function PostDetail() {
         setPost(response.data);
         setComment(response.data.comments);
         setUserName(response.data.user)
+        setPicture(response.data.user.picture)
       });
   }, [id]);
 
@@ -43,7 +45,7 @@ function PostDetail() {
                 <div className="media">
                   <div className="avatar">
                     <img
-                      src="https://media.istockphoto.com/vectors/default-avatar-profile-icon-vector-vector-id1337144146?b=1&k=20&m=1337144146&s=170667a&w=0&h=ys-RUZbXzQ-FQdLstHeWshI4ViJuEhyEa4AzQNQ0rFI="
+                      src={picture}
                       title=""
                       alt=""
                     />

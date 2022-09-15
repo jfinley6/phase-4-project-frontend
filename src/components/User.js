@@ -5,10 +5,8 @@ function User({ user, setUser }) {
   const [userName, setUserName] = useState({
     username: "",
   });
-  const [pictureURL, setPictureURL] = useState("")
-  const [error, setError] = useState("")
-
-
+  const [pictureURL, setPictureURL] = useState("");
+  const [error, setError] = useState("");
 
   function handleChange(event) {
     setUserName({
@@ -17,7 +15,29 @@ function User({ user, setUser }) {
     });
   }
 
-  function handleImageSubmit() {
+  function handleImageSubmit(event) {
+    event.preventDefault();
+    let updatedPictureURL = pictureURL;
+    let updatedPicture = { picture: updatedPictureURL };
+
+    axios
+      .patch(
+        `http://localhost:3001/picture/${user.id}`,
+        {
+          user: {
+            picture: updatedPictureURL,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then(() => {
+        setError("");
+        setUser((user) => ({
+          ...user,
+          ...updatedPicture,
+        }));
+        setPictureURL("")
+      })
 
   }
 
@@ -37,19 +57,17 @@ function User({ user, setUser }) {
         { withCredentials: true }
       )
       .then(() => {
-        setError("")
+        setError("");
         setUser((user) => ({
           ...user,
           ...updatedValue,
         }));
         setUserName({ username: "" });
       })
-      .catch(() => {
-        setError("That username has already been taken")
+      .catch((error) => {
+        console.log(error);
       });
   }
-
-  console.log(user.username)
 
   return (
     <div>
@@ -63,26 +81,23 @@ function User({ user, setUser }) {
             <div className="panel">
               <div className="d-flex flex-end">
                 <img
-                  src="https://media.istockphoto.com/vectors/default-avatar-profile-icon-vector-vector-id1337144146?b=1&k=20&m=1337144146&s=170667a&w=0&h=ys-RUZbXzQ-FQdLstHeWshI4ViJuEhyEa4AzQNQ0rFI="
+                  src={user.picture}
                   alt="User avatar"
                   className="w-25 mb-2 mt-2"
                 />
-                <div className="d-flex flex-column justify-content-end mb-2 mx-2 w-100">
+                <div className="d-flex flex-column justify-content-end mt-3 mb-2 mx-2 w-100">
                   <form onSubmit={handleImageSubmit}>
                     <input
                       type="url"
                       className="form-control w-100"
-                      id="username"
+                      id="picture"
                       value={pictureURL}
                       onChange={(event) => setPictureURL(event.target.value)}
                       placeholder="New Profile Picture URL"
                       required
                       autoComplete="off"
                     />
-                    <button
-                      type="submit"
-                      className="btn btn-primary mt-2 w-25"
-                    >
+                    <button type="submit" className="btn btn-primary mt-2 w-25">
                       Submit
                     </button>
                   </form>
@@ -114,10 +129,7 @@ function User({ user, setUser }) {
                   {error === "" ? null : (
                     <div className="text-danger">{error}</div>
                   )}
-                  <button
-                    type="submit"
-                    className="btn btn-primary mt-2"
-                  >
+                  <button type="submit" className="btn btn-primary mt-2">
                     Submit
                   </button>
                 </div>
