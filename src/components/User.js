@@ -53,7 +53,7 @@ function User({ user, setUser }) {
         <div className="row">
           <div className="col-xs-12 col-sm-9">
             <div className="panel">
-              <div className="">
+              <div>
                 <img
                   src="https://media.istockphoto.com/vectors/default-avatar-profile-icon-vector-vector-id1337144146?b=1&k=20&m=1337144146&s=170667a&w=0&h=ys-RUZbXzQ-FQdLstHeWshI4ViJuEhyEa4AzQNQ0rFI="
                   alt="User avatar"
