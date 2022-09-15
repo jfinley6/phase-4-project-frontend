@@ -34,7 +34,7 @@ function PostDetail() {
           <div className="col-lg-8 m-15px-tb">
             <article className="article d-flex flex-column text-center">
               <div className="article-img">
-                <img src={post.image_url} title="" alt="" />
+                <img className="h-50 w-75" src={post.image_url} title="" alt="" />
               </div>
               <div className="article-title">
                 <h1 className="d-flex flex-column align-items-start">
