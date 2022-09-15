@@ -36,7 +36,12 @@ function PostDetail() {
           <div className="col-lg-8 m-15px-tb">
             <article className="article d-flex flex-column text-center">
               <div className="article-img">
-                <img className="h-50 w-75" src={post.image_url} title="" alt="" />
+                <img
+                  className="h-50 w-75"
+                  src={post.image_url}
+                  title=""
+                  alt=""
+                />
               </div>
               <div className="article-title">
                 <h1 className="d-flex flex-column align-items-start">
@@ -44,11 +49,7 @@ function PostDetail() {
                 </h1>
                 <div className="media">
                   <div className="avatar">
-                    <img
-                      src={picture}
-                      title=""
-                      alt=""
-                    />
+                    <img src={picture} title="" alt="" />
                   </div>
                   <div className="media-body d-flex flex-column align-items-start">
                     <label>{username.username}</label>
@@ -57,11 +58,17 @@ function PostDetail() {
                         ? post.created_at.slice(0, 10)
                         : null}
                     </span>
+
+
+
                   </div>
                 </div>
               </div>
               <div className="article-content">
-                <div className="d-flex flex-column align-items-start" dangerouslySetInnerHTML={{__html: post.body}}></div>
+                <div
+                  className="d-flex flex-column align-items-start"
+                  dangerouslySetInnerHTML={{ __html: post.body }}
+                ></div>
               </div>
             </article>
             <div className="panel panel-info">
