@@ -22,7 +22,7 @@ function Registration({ handleSuccessfulAuth, setScreen }) {
   function handleSubmit(event) {
     axios
       .post(
-        "http://localhost:3001/registrations",
+        "https://radiant-atoll-92288.herokuapp.com/registrations",
         {
           user: {
             username: username,

@@ -11,21 +11,22 @@ function PostDetail({user, loggedInStatus}) {
   const [username, setUserName] = useState({});
   const[newComment, setNewComment] = useState("");
   const history = useHistory()
+  const [commentDependency, setCommentDependency] = useState(false)
 
   const [picture, setPicture] = useState("")
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3001/posts/${id}`, {
+      .get(`https://radiant-atoll-92288.herokuapp.com/posts/${id}`, {
         withCredentials: true,
       })
       .then((response) => {
         setPost(response.data);
         setComment(response.data.comments);
-        setUserName(response.data.user)
-        setPicture(response.data.user.picture)
+        setUserName(response.data.user);
+        setPicture(response.data.user.picture);
       });
-  }, [id, comment]);
+  }, [id, commentDependency]);
 
   function handleChange(e){
         setNewComment(e.target.value);
@@ -37,31 +38,34 @@ function PostDetail({user, loggedInStatus}) {
 
   function handleSubmit(event){
     event.preventDefault()
-    axios.post("http://localhost:3001/comments",
-    {
-        comment: {
+    axios
+      .post(
+        "https://radiant-atoll-92288.herokuapp.com/comments",
+        {
+          comment: {
             body: newComment,
             user_id: user.id,
-            post_id: post.id
+            post_id: post.id,
+          },
         },
-    },
-    { withCredentials: true }
-    ).then(() => {
-      handleClear();
-      axios.get(`http://localhost:3001/posts/${id}`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        
-        setComment(response.data.comments);
-      }).then(() => {
-        document.getElementById("commentButton").scrollIntoView({
-          behavior: "smooth",
-        });
-
-      })
-
-    })
+        { withCredentials: true }
+      )
+      .then(() => {
+        handleClear();
+        axios
+          .get(`https://radiant-atoll-92288.herokuapp.com/posts/${id}`, {
+            withCredentials: true,
+          })
+          .then((response) => {
+            setComment(response.data.comments);
+            setCommentDependency((commentDependency) => !commentDependency);
+          })
+          .then(() => {
+            document.getElementById("commentButton").scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+      });
   }
 
   function goToComments() {

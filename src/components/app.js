@@ -25,7 +25,9 @@ function App() {
 
   function checkLoginStatus() {
     axios
-      .get("http://localhost:3001/logged_in", { withCredentials: true })
+      .get("https://radiant-atoll-92288.herokuapp.com/logged_in", {
+        withCredentials: true,
+      })
       .then((response) => {
         if (response.data.logged_in && loggedInStatus === "NOT_LOGGED_IN") {
           setLoggedInStatus("LOGGED_IN");
@@ -49,7 +51,9 @@ function App() {
 
   function handleLogout() {
     axios
-      .delete("http://localhost:3001/logout", { withCredentials: true })
+      .delete("https://radiant-atoll-92288.herokuapp.com/logout", {
+        withCredentials: true,
+      })
       .then(() => {
         setLoggedInStatus("NOT_LOGGED_IN");
         setUser({});

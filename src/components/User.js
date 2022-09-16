@@ -22,7 +22,7 @@ function User({ user, setUser }) {
 
     axios
       .patch(
-        `http://localhost:3001/picture/${user.id}`,
+        `https://radiant-atoll-92288.herokuapp.com/picture/${user.id}`,
         {
           user: {
             picture: updatedPictureURL,
@@ -36,8 +36,8 @@ function User({ user, setUser }) {
           ...user,
           ...updatedPicture,
         }));
-        setPictureURL("")
-      })
+        setPictureURL("");
+      });
 
   }
 
@@ -48,7 +48,7 @@ function User({ user, setUser }) {
     event.preventDefault();
     axios
       .patch(
-        `http://localhost:3001/registrations/${user.id}`,
+        `https://radiant-atoll-92288.herokuapp.com/registrations/${user.id}`,
         {
           user: {
             username: updatedUsername,
@@ -65,7 +65,7 @@ function User({ user, setUser }) {
         setUserName({ username: "" });
       })
       .catch(() => {
-        setError("That username has already been taken")
+        setError("That username has already been taken");
       });
   }
 

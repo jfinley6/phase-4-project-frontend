@@ -8,13 +8,15 @@ function Content({ loggedInStatus, user }) {
   const [post, setPost] = useState([]);
 
   function handleDelete(id) {
-    axios.delete(`http://localhost:3001/posts/${id}`).then(() => {
-      setPost((post) => post.filter((item) => id !== item.id));
-    });
+    axios
+      .delete(`https://radiant-atoll-92288.herokuapp.com/posts/${id}`)
+      .then(() => {
+        setPost((post) => post.filter((item) => id !== item.id));
+      });
   }
 
   useEffect(() => {
-    fetch("http://localhost:3001/posts")
+    fetch("https://radiant-atoll-92288.herokuapp.com/posts")
       .then((response) => response.json())
       .then((postArr) => setPost(postArr));
   }, []);

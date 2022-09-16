@@ -9,13 +9,11 @@ function Comment({ comment }) {
           <div className="comment-wrapper">
             <ul className="media-list">
               <li className="media mb-0">
-                <a href="#" className="pull-left">
                   <img
                     src={comment.user.picture}
                     alt=""
                     className="img-circle"
                   />
-                </a>
                 <div className="media-body">
                   <span className="text-muted pull-right">
                     <strong >

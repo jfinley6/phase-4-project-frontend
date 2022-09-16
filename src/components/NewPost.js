@@ -41,20 +41,23 @@ function NewPost({
 
 
   function handleSubmit() {
-    axios.post("http://localhost:3001/posts", 
-    {
-      post: {
-        subject: subject,
-        body: value,
-        image_url: imgFile,
-        user_id: user.id
-      },
-    },
+    axios
+      .post(
+        "https://radiant-atoll-92288.herokuapp.com/posts",
+        {
+          post: {
+            subject: subject,
+            body: value,
+            image_url: imgFile,
+            user_id: user.id,
+          },
+        },
         { withCredentials: true }
-    ).then(() => {
-      handleClear()
-      history.push("/")
-    })
+      )
+      .then(() => {
+        handleClear();
+        history.push("/");
+      });
   }
 
   return (
