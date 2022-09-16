@@ -4,20 +4,20 @@ import axios from "axios";
 import "../style/PostDetail.css";
 import Comment from "./Comment";
 
-function PostDetail({user, loggedInStatus}) {
+function PostDetail({ user, loggedInStatus }) {
   const [post, setPost] = useState({});
   const [comment, setComment] = useState([]);
   const { id } = useParams();
   const [username, setUserName] = useState({});
-  const[newComment, setNewComment] = useState("");
-  const history = useHistory()
-  const [commentDependency, setCommentDependency] = useState(false)
+  const [newComment, setNewComment] = useState("");
+  const history = useHistory();
+  const [commentDependency, setCommentDependency] = useState(false);
 
-  const [picture, setPicture] = useState("")
+  const [picture, setPicture] = useState("");
 
   useEffect(() => {
     axios
-      .get(`https://radiant-atoll-92288.herokuapp.com/posts/${id}`, {
+      .get(`http://localhost:3001///posts/${id}`, {
         withCredentials: true,
       })
       .then((response) => {
@@ -28,19 +28,19 @@ function PostDetail({user, loggedInStatus}) {
       });
   }, [id, commentDependency]);
 
-  function handleChange(e){
-        setNewComment(e.target.value);
+  function handleChange(e) {
+    setNewComment(e.target.value);
   }
 
-  function handleClear(){
+  function handleClear() {
     setNewComment("");
   }
 
-  function handleSubmit(event){
-    event.preventDefault()
+  function handleSubmit(event) {
+    event.preventDefault();
     axios
       .post(
-        "https://radiant-atoll-92288.herokuapp.com/comments",
+        "http://localhost:3001///comments",
         {
           comment: {
             body: newComment,
@@ -53,7 +53,7 @@ function PostDetail({user, loggedInStatus}) {
       .then(() => {
         handleClear();
         axios
-          .get(`https://radiant-atoll-92288.herokuapp.com/posts/${id}`, {
+          .get(`http://localhost:3001///posts/${id}`, {
             withCredentials: true,
           })
           .then((response) => {
@@ -74,8 +74,16 @@ function PostDetail({user, loggedInStatus}) {
     });
   }
 
+  function handleDelete(id) {
+    axios.delete(`http://localhost:3001///comments/${id}`).then(() => {
+      setComment((comment) => comment.filter((item) => id !== item.id));
+    }).then(() => {
+      setCommentDependency((commentDependency) => !commentDependency);
+    })
+  }
+
   const allComment = comment.map((comment) => {
-    return <Comment comment={comment} key={comment.id} />;
+    return <Comment comment={comment} handleDelete={handleDelete} user={user} key={comment.id} />;
   });
 
   return (
@@ -107,9 +115,15 @@ function PostDetail({user, loggedInStatus}) {
                         ? post.created_at.slice(0, 10)
                         : null}
                     </span>
-                    <button onClick={goToComments} className="btn btn-outline-primary">
+                    <button
+                      onClick={goToComments}
+                      className="btn btn-outline-primary"
+                    >
                       <span>
-                        {post.comments === undefined ? null : post.comments.length} comments
+                        {post.comments === undefined
+                          ? null
+                          : post.comments.length}{" "}
+                        comments
                       </span>
                     </button>
                   </div>
@@ -123,7 +137,9 @@ function PostDetail({user, loggedInStatus}) {
               </div>
             </article>
             <div className="panel panel-info">
-              <div id="comments" className="panel-heading">Comments</div>
+              <div id="comments" className="panel-heading">
+                Comments
+              </div>
               <div className="panel-body">
                 <form onSubmit={handleSubmit}>
                   <textarea

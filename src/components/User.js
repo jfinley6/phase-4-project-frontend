@@ -22,7 +22,7 @@ function User({ user, setUser }) {
 
     axios
       .patch(
-        `https://radiant-atoll-92288.herokuapp.com/picture/${user.id}`,
+        `http://localhost:3001///picture/${user.id}`,
         {
           user: {
             picture: updatedPictureURL,
@@ -38,7 +38,6 @@ function User({ user, setUser }) {
         }));
         setPictureURL("");
       });
-
   }
 
   function handleSubmit(event) {
@@ -48,7 +47,7 @@ function User({ user, setUser }) {
     event.preventDefault();
     axios
       .patch(
-        `https://radiant-atoll-92288.herokuapp.com/registrations/${user.id}`,
+        `http://localhost:3001///registrations/${user.id}`,
         {
           user: {
             username: updatedUsername,

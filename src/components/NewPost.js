@@ -9,13 +9,13 @@ function NewPost({
   storedPost,
   setStoredSubject,
   storedSubject,
-  user
+  user,
 }) {
   const [value, setValue] = useState("");
   const [subject, setSubject] = useState("");
   const [imgFile, setImgFile] = useState({});
 
-  const history = useHistory()
+  const history = useHistory();
 
   useEffect(() => {
     setValue(storedPost);
@@ -39,11 +39,10 @@ function NewPost({
     setStoredSubject("");
   }
 
-
   function handleSubmit() {
     axios
       .post(
-        "https://radiant-atoll-92288.herokuapp.com/posts",
+        "http://localhost:3001///posts",
         {
           post: {
             subject: subject,

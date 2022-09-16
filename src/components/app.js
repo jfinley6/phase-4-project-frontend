@@ -25,7 +25,7 @@ function App() {
 
   function checkLoginStatus() {
     axios
-      .get("https://radiant-atoll-92288.herokuapp.com/logged_in", {
+      .get("http://localhost:3001///logged_in", {
         withCredentials: true,
       })
       .then((response) => {
@@ -51,7 +51,7 @@ function App() {
 
   function handleLogout() {
     axios
-      .delete("https://radiant-atoll-92288.herokuapp.com/logout", {
+      .delete("http://localhost:3001///logout", {
         withCredentials: true,
       })
       .then(() => {
@@ -95,7 +95,7 @@ function App() {
         </Route>
 
         <Route exact path={"/user"}>
-          <User user={user} setUser={setUser}/>
+          <User user={user} setUser={setUser} />
         </Route>
         <Route exact path="/posts/:id">
           <PostDetail user={user} loggedInStatus={loggedInStatus} />
