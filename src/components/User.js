@@ -96,7 +96,7 @@ function User({ user, setUser }) {
                       required
                       autoComplete="off"
                     />
-                    <button type="submit" className="btn btn-primary mt-2 w-25">
+                    <button type="submit" className="btn btn-primary mt-2">
                       Submit
                     </button>
                   </form>
