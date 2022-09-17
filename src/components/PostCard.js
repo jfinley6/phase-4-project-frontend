@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function PostCard({ post, user, handleDelete }) {
-  console.log(post.comments)
 
   return (
     <div className="col-12 col-sm-8 col-md-6 col-lg-4 mb-3">

@@ -45,7 +45,7 @@ function Registration({ handleSuccessfulAuth, setScreen }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="d-flex flex-column">
+    <form onSubmit={handleSubmit} className="d-flex flex-column w-50">
       <div className="form-group d-flex flex-column align-items-center">
         <label htmlFor="InputUsername1">Username</label>
         <input

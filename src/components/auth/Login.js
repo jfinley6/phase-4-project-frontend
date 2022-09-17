@@ -8,6 +8,7 @@ function Login({ handleSuccessfulAuth, setScreen }) {
     password: "",
     loginErrors: "",
   });
+  const [error, setError] = useState("")
 
   const { email, password } = registration;
 
@@ -31,9 +32,20 @@ function Login({ handleSuccessfulAuth, setScreen }) {
         { withCredentials: true }
       )
       .then((response) => {
-        console.log(response);
         if (response.data.logged_in) {
           handleSuccessfulAuth(response.data.user);
+          setError("")
+        }
+        else if (response.data.status === 401) {
+          let updatedPassword = { password: "" }
+          let updatedEmail = { email: "" }
+          setRegistration((registration) => ({
+            ...registration,
+            ...updatedPassword,
+            ...updatedEmail
+          }));
+          setError("That username/password combo doesn't exist!")
+          
         }
       })
       .catch((error) => {
@@ -43,7 +55,7 @@ function Login({ handleSuccessfulAuth, setScreen }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="d-flex flex-column">
+    <form onSubmit={handleSubmit} id="loginForm" className="d-flex flex-column w-50">
       <div className="form-group d-flex flex-column align-items-center">
         <label htmlFor="exampleInputEmail1">Email address</label>
         <input
@@ -75,6 +87,11 @@ function Login({ handleSuccessfulAuth, setScreen }) {
       <button className="btn btn-primary mt-2" type="submit">
         Login
       </button>
+      {error === "" ? null : (
+        <div style={{ textAlign: "center" }} className="text-danger mt-2">
+          {error}
+        </div>
+      )}
       <div className="d-flex flex-column align-items-center mt-2">
         <div>Don't have an account?</div>
         <a
