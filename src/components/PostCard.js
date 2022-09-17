@@ -25,7 +25,7 @@ function PostCard({ post, user, handleDelete }) {
               </button>
             ) : null}
           </div>
-          <div style={{textAlign: "center"}} class="card-footer text-muted d-flex justify-content-center bg-transparent border-top-0">
+          <div style={{textAlign: "center"}} className="card-footer text-muted d-flex justify-content-center bg-transparent border-top-0">
             <div className="views">Created: {post.created_at.slice(0, -14)}</div>
           </div>
         </div>
