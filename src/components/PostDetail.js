@@ -11,8 +11,13 @@ function PostDetail({ user, loggedInStatus }) {
   const [username, setUserName] = useState({});
   const [newComment, setNewComment] = useState("");
   const [commentDependency, setCommentDependency] = useState(false);
+  const [postBody, setPostBody] = useState("")
 
   const [picture, setPicture] = useState("");
+
+  useEffect(() => {
+    setPostBody(post.body === undefined ? null : post.body.replace(/<p><br\b[^>]*>(.*?)<\/p>/g, ""))
+  }, [post])
 
   useEffect(() => {
     axios
@@ -146,10 +151,12 @@ function PostDetail({ user, loggedInStatus }) {
                   </div>
                 </div>
               </div>
-              <div className="article-content">
+              <div id="article-content" className="article-content">
                 <div
                   className="d-flex flex-column align-items-start"
-                  dangerouslySetInnerHTML={{ __html: post.body }}
+                  dangerouslySetInnerHTML={{
+                    __html: postBody,
+                  }}
                 ></div>
               </div>
             </article>
