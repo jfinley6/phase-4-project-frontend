@@ -22,7 +22,7 @@ function Comment({ comment, user, handleDelete }) {
                       Delete
                     </button>
                   ) : null}
-                  <p>{comment.body}</p>
+                  <p className="mb-0 mt-1">{comment.body}</p>
                 </div>
               </li>
             </ul>
