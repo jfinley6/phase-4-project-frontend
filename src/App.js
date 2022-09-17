@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import axios from "axios";
+import "./index.css"
 
 //Components
 import Home from "./components/Home"
