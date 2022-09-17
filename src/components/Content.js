@@ -41,8 +41,8 @@ function Content({ loggedInStatus, user }) {
   }
 
   return (
-    <div className="container mt-3">
-      <div className="row d-flex justify-content-around">{allPosts}</div>
+    <div className="container mt-3 d-flex justify-content-center">
+      <div className="row d-flex justify-content-evenly w-100">{allPosts}</div>
     </div>
   );
 }
