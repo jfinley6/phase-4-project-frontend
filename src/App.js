@@ -72,12 +72,13 @@ function App() {
   return (
     <div className="app d-flex flex-column justify-content-center">
       {heroku === "not ready" ? (
-        <h3
-          style={{ height: "100vh" }}
-          className="d-flex justify-content-center align-items-center"
-        >
-          Heroku Loading
-        </h3>
+        <div style={{height: "100vh"}} className="d-flex flex-column align-items-center justify-content-center">
+          <span className="loader"></span>
+          <h3
+          >
+            Heroku Loading
+          </h3>
+        </div>
       ) : (
         <>
           <NavBar
