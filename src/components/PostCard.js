@@ -5,7 +5,7 @@ function PostCard({ post, user, handleDelete }) {
 
   return (
     <div className="col-12 col-sm-8 col-md-6 col-lg-4 mb-3">
-      <div className="card d-flex">
+      <div className="card d-flex shadow">
         <img
           className="card-img mx-auto mt-3"
           style={{ width: "200px", height: "150px", objectFit: "cover" }}
