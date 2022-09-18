@@ -151,8 +151,9 @@ function PostDetail({ user, loggedInStatus }) {
                   </div>
                 </div>
               </div>
-              <div id="article-content" className="article-content">
+              <div className="article-content">
                 <div
+                  id="article-content"
                   className="d-flex flex-column align-items-start"
                   dangerouslySetInnerHTML={{
                     __html: postBody,
