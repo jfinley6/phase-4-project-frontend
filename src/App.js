@@ -22,7 +22,7 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    axios.get("https://radiant-atoll-92288.herokuapp.com").then((response) => {
+    axios.get("https://mysite-sig2.onrender.com").then((response) => {
       if (response.data.status === "Nobodies home") {
         setHeroku("ready");
         checkLoginStatus();
@@ -32,7 +32,7 @@ function App() {
 
   function checkLoginStatus() {
     axios
-      .get("https://radiant-atoll-92288.herokuapp.com/logged_in", {
+      .get("https://mysite-sig2.onrender.com/logged_in", {
         withCredentials: true,
       })
       .then((response) => {
@@ -58,7 +58,7 @@ function App() {
 
   function handleLogout() {
     axios
-      .delete("https://radiant-atoll-92288.herokuapp.com/logout", {
+      .delete("https://mysite-sig2.onrender.com/logout", {
         withCredentials: true,
       })
       .then(() => {
@@ -72,12 +72,12 @@ function App() {
   return (
     <div className="app d-flex flex-column justify-content-center">
       {heroku === "not ready" ? (
-        <div style={{height: "100vh"}} className="d-flex flex-column align-items-center justify-content-center">
+        <div
+          style={{ height: "100vh" }}
+          className="d-flex flex-column align-items-center justify-content-center"
+        >
           <span className="loader"></span>
-          <h3
-          >
-            Heroku Loading
-          </h3>
+          <h3>Database Loading</h3>
         </div>
       ) : (
         <>

@@ -42,7 +42,7 @@ function NewPost({
   function handleSubmit() {
     axios
       .post(
-        "https://radiant-atoll-92288.herokuapp.com/posts",
+        "https://mysite-sig2.onrender.com/posts",
         {
           post: {
             subject: subject,

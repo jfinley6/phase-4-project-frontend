@@ -22,7 +22,7 @@ function User({ user, setUser }) {
 
     axios
       .patch(
-        `https://radiant-atoll-92288.herokuapp.com/picture/${user.id}`,
+        `https://mysite-sig2.onrender.com/picture/${user.id}`,
         {
           user: {
             picture: updatedPictureURL,
@@ -47,7 +47,7 @@ function User({ user, setUser }) {
     event.preventDefault();
     axios
       .patch(
-        `https://radiant-atoll-92288.herokuapp.com/registrations/${user.id}`,
+        `https://mysite-sig2.onrender.com/registrations/${user.id}`,
         {
           user: {
             username: updatedUsername,

@@ -11,17 +11,21 @@ function PostDetail({ user, loggedInStatus }) {
   const [username, setUserName] = useState({});
   const [newComment, setNewComment] = useState("");
   const [commentDependency, setCommentDependency] = useState(false);
-  const [postBody, setPostBody] = useState("")
+  const [postBody, setPostBody] = useState("");
 
   const [picture, setPicture] = useState("");
 
   useEffect(() => {
-    setPostBody(post.body === undefined ? null : post.body.replace(/<p><br\b[^>]*>(.*?)<\/p>/g, ""))
-  }, [post])
+    setPostBody(
+      post.body === undefined
+        ? null
+        : post.body.replace(/<p><br\b[^>]*>(.*?)<\/p>/g, "")
+    );
+  }, [post]);
 
   useEffect(() => {
     axios
-      .get(`https://radiant-atoll-92288.herokuapp.com/posts/${id}`, {
+      .get(`https://mysite-sig2.onrender.com/posts/${id}`, {
         withCredentials: true,
       })
       .then((response) => {
@@ -44,7 +48,7 @@ function PostDetail({ user, loggedInStatus }) {
     event.preventDefault();
     axios
       .post(
-        "https://radiant-atoll-92288.herokuapp.com/comments",
+        "https://mysite-sig2.onrender.com/comments",
         {
           comment: {
             body: newComment,
@@ -57,7 +61,7 @@ function PostDetail({ user, loggedInStatus }) {
       .then(() => {
         handleClear();
         axios
-          .get(`https://radiant-atoll-92288.herokuapp.com/posts/${id}`, {
+          .get(`https://mysite-sig2.onrender.com/posts/${id}`, {
             withCredentials: true,
           })
           .then((response) => {
@@ -80,7 +84,7 @@ function PostDetail({ user, loggedInStatus }) {
 
   function handleDelete(id) {
     axios
-      .delete(`https://radiant-atoll-92288.herokuapp.com/comments/${id}`)
+      .delete(`https://mysite-sig2.onrender.com/comments/${id}`)
       .then(() => {
         setComment((comment) => comment.filter((item) => id !== item.id));
       })

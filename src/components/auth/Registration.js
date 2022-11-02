@@ -22,7 +22,7 @@ function Registration({ handleSuccessfulAuth, setScreen }) {
   function handleSubmit(event) {
     axios
       .post(
-        "https://radiant-atoll-92288.herokuapp.com/registrations",
+        "https://mysite-sig2.onrender.com/registrations",
         {
           user: {
             username: username,
