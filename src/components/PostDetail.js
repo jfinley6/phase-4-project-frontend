@@ -25,7 +25,7 @@ function PostDetail({ user, loggedInStatus }) {
 
   useEffect(() => {
     axios
-      .get(`https://mysite-sig2.onrender.com/posts/${id}`, {
+      .get(`https://mysite-ll4a.onrender.com/posts/${id}`, {
         withCredentials: true,
       })
       .then((response) => {
@@ -48,7 +48,7 @@ function PostDetail({ user, loggedInStatus }) {
     event.preventDefault();
     axios
       .post(
-        "https://mysite-sig2.onrender.com/comments",
+        "https://mysite-ll4a.onrender.com/comments",
         {
           comment: {
             body: newComment,
@@ -61,7 +61,7 @@ function PostDetail({ user, loggedInStatus }) {
       .then(() => {
         handleClear();
         axios
-          .get(`https://mysite-sig2.onrender.com/posts/${id}`, {
+          .get(`https://mysite-ll4a.onrender.com/posts/${id}`, {
             withCredentials: true,
           })
           .then((response) => {
@@ -84,7 +84,7 @@ function PostDetail({ user, loggedInStatus }) {
 
   function handleDelete(id) {
     axios
-      .delete(`https://mysite-sig2.onrender.com/comments/${id}`)
+      .delete(`https://mysite-ll4a.onrender.com/comments/${id}`)
       .then(() => {
         setComment((comment) => comment.filter((item) => id !== item.id));
       })

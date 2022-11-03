@@ -42,7 +42,7 @@ function NewPost({
   function handleSubmit() {
     axios
       .post(
-        "https://mysite-sig2.onrender.com/posts",
+        "https://mysite-ll4a.onrender.com/posts",
         {
           post: {
             subject: subject,

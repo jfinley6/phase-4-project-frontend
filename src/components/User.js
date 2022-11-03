@@ -22,7 +22,7 @@ function User({ user, setUser }) {
 
     axios
       .patch(
-        `https://mysite-sig2.onrender.com/picture/${user.id}`,
+        `https://mysite-ll4a.onrender.com/picture/${user.id}`,
         {
           user: {
             picture: updatedPictureURL,
@@ -47,7 +47,7 @@ function User({ user, setUser }) {
     event.preventDefault();
     axios
       .patch(
-        `https://mysite-sig2.onrender.com/registrations/${user.id}`,
+        `https://mysite-ll4a.onrender.com/registrations/${user.id}`,
         {
           user: {
             username: updatedUsername,

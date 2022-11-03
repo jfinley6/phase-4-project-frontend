@@ -22,7 +22,7 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    axios.get("https://mysite-sig2.onrender.com").then((response) => {
+    axios.get("https://mysite-ll4a.onrender.com").then((response) => {
       if (response.data.status === "Nobodies home") {
         setHeroku("ready");
         checkLoginStatus();
@@ -32,7 +32,7 @@ function App() {
 
   function checkLoginStatus() {
     axios
-      .get("https://mysite-sig2.onrender.com/logged_in", {
+      .get("https://mysite-ll4a.onrender.com/logged_in", {
         withCredentials: true,
       })
       .then((response) => {
@@ -58,7 +58,7 @@ function App() {
 
   function handleLogout() {
     axios
-      .delete("https://mysite-sig2.onrender.com/logout", {
+      .delete("https://mysite-ll4a.onrender.com/logout", {
         withCredentials: true,
       })
       .then(() => {

@@ -22,7 +22,7 @@ function Registration({ handleSuccessfulAuth, setScreen }) {
   function handleSubmit(event) {
     axios
       .post(
-        "https://mysite-sig2.onrender.com/registrations",
+        "https://mysite-ll4a.onrender.com/registrations",
         {
           user: {
             username: username,

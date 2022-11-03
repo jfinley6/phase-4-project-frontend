@@ -8,13 +8,13 @@ function Content({ loggedInStatus, user }) {
   const [post, setPost] = useState([]);
 
   function handleDelete(id) {
-    axios.delete(`https://mysite-sig2.onrender.com/posts/${id}`).then(() => {
+    axios.delete(`https://mysite-ll4a.onrender.com/posts/${id}`).then(() => {
       setPost((post) => post.filter((item) => id !== item.id));
     });
   }
 
   useEffect(() => {
-    fetch("https://mysite-sig2.onrender.com/posts")
+    fetch("https://mysite-ll4a.onrender.com/posts")
       .then((response) => response.json())
       .then((postArr) => setPost(postArr));
   }, []);
